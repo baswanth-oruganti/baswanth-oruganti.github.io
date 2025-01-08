@@ -98,7 +98,7 @@
     <h2>Consent and Participant Information</h2>
     <p class="section-desc">Please provide your information and consent to use this data for research purposes.</p>
 
-    <form id="prakrutiForm">
+    <form id="prakrutiForm" onsubmit="generatePDF(event)">
         <div class="question">
             <label for="name">Name:</label>
             <input type="text" id="name" name="name" required>
@@ -362,7 +362,7 @@
             <input type="radio" name="q35" value="2"> Intense and passionate (2)<br>
             <input type="radio" name="q35" value="3"> Moderate and steady (3)
         </div>
-        <button type="button" onclick="calculateResults()">Submit</button>
+	<button type="submit">Submit</button>
     </form>
 
     <div class="result" id="result"></div>
