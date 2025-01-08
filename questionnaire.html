@@ -3,73 +3,101 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ayurvedic Prakruti Questionnaire</title>
+    <title>Ayurvedic Prakruti Quiz</title>
     <style>
         body {
             font-family: Arial, sans-serif;
-            margin: 20px;
-            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
             color: #333;
         }
-        h1, h2, h3 {
+        header {
+            background: #4F81BD;
+            color: #fff;
+            padding: 20px;
             text-align: center;
+        }
+        header h1 {
+            margin: 0;
+        }
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+        }
+        h2 {
+            border-bottom: 2px solid #4F81BD;
+            padding-bottom: 10px;
             color: #4F81BD;
         }
-        form {
-            margin-top: 20px;
-            padding: 20px;
-            background: white;
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        .section-desc {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 10px;
         }
         .question {
-            margin-bottom: 15px;
+            margin: 15px 0;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background: #f9f9f9;
         }
         .question label {
             display: block;
-            font-weight: bold;
             margin-bottom: 5px;
+            font-weight: bold;
+        }
+        .question input[type="radio"] {
+            margin-right: 10px;
         }
         button {
             display: block;
-            margin: 20px auto;
-            padding: 10px 20px;
+            width: 100%;
+            padding: 10px;
             background: #4F81BD;
             color: white;
             border: none;
-            border-radius: 4px;
+            border-radius: 5px;
             cursor: pointer;
+            font-size: 16px;
         }
         button:hover {
             background: #3769a0;
         }
         .result {
             margin-top: 20px;
+            padding: 20px;
+            background: #eef;
+            border-radius: 5px;
+            border: 1px solid #4F81BD;
+            color: #333;
             text-align: center;
-            font-weight: bold;
         }
-        table {
-            width: 100%;
-            margin-top: 20px;
-            border-collapse: collapse;
-        }
-        table, th, td {
-            border: 1px solid #333;
-        }
-        th, td {
-            padding: 10px;
-            text-align: center;
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+            button {
+                font-size: 14px;
+            }
         }
     </style>
 </head>
 <body>
 
-    <h1>Ayurvedic Prakruti Questionnaire</h1>
-    <h3>Answer the questions to identify your Prakruti</h3>
+<header>
+    <h1>Ayurvedic Prakruti Quiz</h1>
+</header>
+
+<div class="container">
+    <h2>Section 1: Physical Traits</h2>
+    <p class="section-desc">Answer the following questions to understand your physical characteristics related to Ayurvedic Prakruti.</p>
 
     <form id="prakrutiForm">
-        <h3>Section 1: Physical Traits</h3>
-
         <div class="question">
             <label for="q1">1. Body Frame:</label>
             <input type="radio" name="q1" value="1" id="q1"> Thin and light (1)<br>
@@ -84,38 +112,39 @@
             <input type="radio" name="q2" value="3"> High; gains weight easily but difficult to lose (3)
         </div>
 
-        <!-- Continue adding all the questions in the same pattern -->
+        <!-- Add remaining questions following the same structure -->
 
         <button type="button" onclick="calculateResults()">Submit</button>
     </form>
 
     <div class="result" id="result"></div>
+</div>
 
-    <script>
-        function calculateResults() {
-            const form = document.getElementById('prakrutiForm');
-            const formData = new FormData(form);
+<script>
+    function calculateResults() {
+        const form = document.getElementById('prakrutiForm');
+        const formData = new FormData(form);
 
-            let option1Count = 0;
-            let option2Count = 0;
-            let option3Count = 0;
+        let option1Count = 0;
+        let option2Count = 0;
+        let option3Count = 0;
 
-            for (const [key, value] of formData.entries()) {
-                if (value === '1') option1Count++;
-                if (value === '2') option2Count++;
-                if (value === '3') option3Count++;
-            }
-
-            const total = option1Count + option2Count + option3Count;
-
-            document.getElementById('result').innerHTML = `
-                <p>Total Responses: ${total}</p>
-                <p>Vata (Option 1): ${option1Count} (${((option1Count / total) * 100).toFixed(2)}%)</p>
-                <p>Pitta (Option 2): ${option2Count} (${((option2Count / total) * 100).toFixed(2)}%)</p>
-                <p>Kapha (Option 3): ${option3Count} (${((option3Count / total) * 100).toFixed(2)}%)</p>
-            `;
+        for (const [key, value] of formData.entries()) {
+            if (value === '1') option1Count++;
+            if (value === '2') option2Count++;
+            if (value === '3') option3Count++;
         }
-    </script>
+
+        const total = option1Count + option2Count + option3Count;
+
+        document.getElementById('result').innerHTML = `
+            <p>Total Responses: ${total}</p>
+            <p>Vata (Option 1): ${option1Count} (${((option1Count / total) * 100).toFixed(2)}%)</p>
+            <p>Pitta (Option 2): ${option2Count} (${((option2Count / total) * 100).toFixed(2)}%)</p>
+            <p>Kapha (Option 3): ${option3Count} (${((option3Count / total) * 100).toFixed(2)}%)</p>
+        `;
+    }
+</script>
 
 </body>
 </html>
