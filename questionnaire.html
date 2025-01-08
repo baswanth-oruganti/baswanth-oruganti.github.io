@@ -368,84 +368,88 @@
     <div class="result" id="result"></div>
 </div>
 
+<!-- Include jsPDF library -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
 
 <script>
-	async function generatePDF(event) {
-    event.preventDefault(); // Prevent the form's default submission behavior
+    async function generatePDF(event) {
+        event.preventDefault(); // Prevent default form submission
 
-    const form = document.getElementById('prakrutiForm');
-    const formData = new FormData(form);
+        const form = document.getElementById('prakrutiForm');
+        const formData = new FormData(form);
 
-    // Initialize counters for Vata, Pitta, and Kapha answers
-    let option1Count = 0;
-    let option2Count = 0;
-    let option3Count = 0;
-
-    // Collect form data and count responses
-    const userData = {};
-    formData.forEach((value, key) => {
-        if (['name', 'age', 'gender', 'consent'].includes(key)) {
-            userData[key] = value; // Collect user information
-        } else {
-            if (value === '1') option1Count++;
-            if (value === '2') option2Count++;
-            if (value === '3') option3Count++;
+        // Validate all required fields
+        const totalQuestions = 35;
+        for (let i = 1; i <= totalQuestions; i++) {
+            if (!formData.get(`q${i}`)) {
+                alert(`Please answer question ${i}.`);
+                return;
+            }
         }
-    });
 
-    // Calculate percentages for Vata, Pitta, and Kapha
-    const total = option1Count + option2Count + option3Count;
-    const vataPercent = ((option1Count / total) * 100).toFixed(2);
-    const pittaPercent = ((option2Count / total) * 100).toFixed(2);
-    const kaphaPercent = ((option3Count / total) * 100).toFixed(2);
+        let option1Count = 0, option2Count = 0, option3Count = 0;
+        const userData = {};
 
-    userData.results = {
-        vata: `${vataPercent}%`,
-        pitta: `${pittaPercent}%`,
-        kapha: `${kaphaPercent}%`,
-    };
-
-    console.log('User Data:', userData); // Debugging log
-
-    // Display results on the page
-    document.getElementById('result').innerHTML = `
-        <p>Your Results:</p>
-        <ul>
-            <li>Vata: ${vataPercent}%</li>
-            <li>Pitta: ${pittaPercent}%</li>
-            <li>Kapha: ${kaphaPercent}%</li>
-        </ul>
-    `;
-
-    // Send the data to the server
-    try {
-        const response = await fetch('/save_results', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(userData),
+        formData.forEach((value, key) => {
+            if (['name', 'age', 'gender', 'consent'].includes(key)) {
+                userData[key] = value;
+            } else {
+                if (value === '1') option1Count++;
+                if (value === '2') option2Count++;
+                if (value === '3') option3Count++;
+            }
         });
 
-        const result = await response.text();
-        console.log('Server Response:', result); // Log the server response
-        alert('Results submitted successfully.');
-    } catch (error) {
-        console.error('Error submitting results:', error);
-        alert('An error occurred while submitting your results. Please try again.');
-    }
+        const total = option1Count + option2Count + option3Count;
+        const vataPercent = ((option1Count / total) * 100).toFixed(2);
+        const pittaPercent = ((option2Count / total) * 100).toFixed(2);
+        const kaphaPercent = ((option3Count / total) * 100).toFixed(2);
 
-    // Generate a downloadable PDF for the user
-    const { jsPDF } = window.jspdf;
-    const doc = new jsPDF();
-    doc.text(`Ayurvedic Prakruti Quiz Results`, 10, 10);
-    doc.text(`Name: ${userData.name}`, 10, 20);
-    doc.text(`Age: ${userData.age}`, 10, 30);
-    doc.text(`Gender: ${userData.gender}`, 10, 40);
-    doc.text(`Results:`, 10, 50);
-    doc.text(`- Vata: ${userData.results.vata}`, 10, 60);
-    doc.text(`- Pitta: ${userData.results.pitta}`, 10, 70);
-    doc.text(`- Kapha: ${userData.results.kapha}`, 10, 80);
-    doc.save(`${userData.name}_Prakruti_Results.pdf`);
-}
-<script>/
+        userData.results = {
+            vata: `${vataPercent}%`,
+            pitta: `${pittaPercent}%`,
+            kapha: `${kaphaPercent}%`,
+        };
+
+        // Display results
+        document.getElementById('result').innerHTML = `
+            <p>Your Results:</p>
+            <ul>
+                <li>Vata: ${vataPercent}%</li>
+                <li>Pitta: ${pittaPercent}%</li>
+                <li>Kapha: ${kaphaPercent}%</li>
+            </ul>
+        `;
+
+        // Send results to server
+        try {
+            const response = await fetch('/save_results', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(userData),
+            });
+
+            const result = await response.text();
+            console.log('Server Response:', result);
+            alert('Results submitted successfully.');
+        } catch (error) {
+            console.error('Error submitting results:', error);
+            alert('An error occurred. Please try again.');
+        }
+
+        // Generate PDF
+        const { jsPDF } = window.jspdf;
+        const doc = new jsPDF();
+        doc.text('Ayurvedic Prakruti Quiz Results', 10, 10);
+        doc.text(`Name: ${userData.name}`, 10, 20);
+        doc.text(`Age: ${userData.age}`, 10, 30);
+        doc.text(`Gender: ${userData.gender}`, 10, 40);
+        doc.text('Results:', 10, 50);
+        doc.text(`- Vata: ${userData.results.vata}`, 10, 60);
+        doc.text(`- Pitta: ${userData.results.pitta}`, 10, 70);
+        doc.text(`- Kapha: ${userData.results.kapha}`, 10, 80);
+        doc.save(`${userData.name}_Prakruti_Results.pdf`);
+    }
+</script>
+</body>
+</html>
