@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ayurvedic Prakriti Questionnaire</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+        h1, h2, h3 {
+            text-align: center;
+            color: #4F81BD;
+        }
+        form {
+            margin-top: 20px;
+            padding: 20px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .question {
+            margin-bottom: 15px;
+        }
+        .question label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        button {
+            display: block;
+            margin: 20px auto;
+            padding: 10px 20px;
+            background: #4F81BD;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background: #3769a0;
+        }
+        .result {
+            margin-top: 20px;
+            text-align: center;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Ayurvedic Prakriti Questionnaire</h1>
+    <h3>Answer the questions to identify your Prakriti</h3>
+
+    <form id="prakritiForm">
+        <!-- Section 1: Physical Traits -->
+        <h2>Section 1: Physical Traits</h2>
+        <div class="question">
+            <label>1. Body Frame:</label>
+            <input type="radio" name="q1" value="1"> Thin and light (1)<br>
+            <input type="radio" name="q1" value="2"> Medium and balanced (2)<br>
+            <input type="radio" name="q1" value="3"> Broad and heavy (3)
+        </div>
+
+        <div class="question">
+            <label>2. Body Weight:</label>
+            <input type="radio" name="q2" value="1"> Low; hard to gain weight (1)<br>
+            <input type="radio" name="q2" value="2"> Moderate; gain or lose weight easily (2)<br>
+            <input type="radio" name="q2" value="3"> High; gains weight easily but difficult to lose (3)
+        </div>
+
+        <!-- Add all remaining questions here using the same structure -->
+        <!-- For brevity, only two questions are included as examples -->
+
+        <button type="button" onclick="calculateResults()">Submit</button>
+    </form>
+
+    <div class="result" id="result"></div>
+
+    <script>
+        function calculateResults() {
+            const form = document.getElementById('prakritiForm');
+            const formData = new FormData(form);
+
+            let option1Count = 0;
+            let option2Count = 0;
+            let option3Count = 0;
+
+            for (const [key, value] of formData.entries()) {
+                if (value === '1') option1Count++;
+                if (value === '2') option2Count++;
+                if (value === '3') option3Count++;
+            }
+
+            const total = option1Count + option2Count + option3Count;
+
+            document.getElementById('result').innerHTML = `
+                <p>Total Responses: ${total}</p>
+                <p>Vata (Option 1): ${option1Count} (${((option1Count / total) * 100).toFixed(2)}%)</p>
+                <p>Pitta (Option 2): ${option2Count} (${((option2Count / total) * 100).toFixed(2)}%)</p>
+                <p>Kapha (Option 3): ${option3Count} (${((option3Count / total) * 100).toFixed(2)}%)</p>
+            `;
+        }
+    </script>
+
+</body>
+</html>
+
