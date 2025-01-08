@@ -359,9 +359,9 @@
         
 	<div class="question">
             <label for="q35">35. Sexual Drive:</label>
-            <input type="radio" name="q34" value="1"> Variable (1)<br>
-            <input type="radio" name="q34" value="2"> Intense and passionate (2)<br>
-            <input type="radio" name="q34" value="3"> Moderate and steady (3)
+            <input type="radio" name="q35" value="1"> Variable (1)<br>
+            <input type="radio" name="q35" value="2"> Intense and passionate (2)<br>
+            <input type="radio" name="q35" value="3"> Moderate and steady (3)
         </div>
         <button type="button" onclick="calculateResults()">Submit</button>
     </form>
@@ -371,46 +371,78 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
 <script>
-    function generatePDF() {
+    async function calculateResults() {
         const form = document.getElementById('prakrutiForm');
         const formData = new FormData(form);
 
+        // Gather responses
         let option1Count = 0;
         let option2Count = 0;
         let option3Count = 0;
 
-        const doc = new jspdf.jsPDF();
-        let content = 'Ayurvedic Prakruti Analysis Results\n\n';
-
+        let userDetails = "";
         formData.forEach((value, key) => {
-            content += `${key}: ${value}\n`;
-            if (value === '1') option1Count++;
-            if (value === '2') option2Count++;
-            if (value === '3') option3Count++;
+            if (key === "name" || key === "age" || key === "gender" || key === "consent") {
+                userDetails += `${key}: ${value}\n`;
+            } else {
+                if (value === '1') option1Count++;
+                if (value === '2') option2Count++;
+                if (value === '3') option3Count++;
+            }
         });
 
+        // Calculate percentages
         const total = option1Count + option2Count + option3Count;
         const vataPercent = ((option1Count / total) * 100).toFixed(2);
         const pittaPercent = ((option2Count / total) * 100).toFixed(2);
         const kaphaPercent = ((option3Count / total) * 100).toFixed(2);
 
-        content += `\nTotal Responses: ${total}\n`;
-        content += `Vata (Option 1): ${option1Count} (${vataPercent}%)\n`;
-        content += `Pitta (Option 2): ${option2Count} (${pittaPercent}%)\n`;
-        content += `Kapha (Option 3): ${option3Count} (${kaphaPercent}%)\n`;
+        // Show results in the webpage
+        const resultDiv = document.getElementById('result');
+        resultDiv.innerHTML = `
+            <p><strong>Your Results:</strong></p>
+            <p>Vata (Option 1): ${option1Count} (${vataPercent}%)</p>
+            <p>Pitta (Option 2): ${option2Count} (${pittaPercent}%)</p>
+            <p>Kapha (Option 3): ${option3Count} (${kaphaPercent}%)</p>
+        `;
 
-        doc.text(content, 10, 10);
+        // Create PDF content
+        const pdfContent = `
+            Ayurvedic Prakruti Quiz Results
 
+            ${userDetails}
+            Total Responses: ${total}
+            Vata (Option 1): ${option1Count} (${vataPercent}%)
+            Pitta (Option 2): ${option2Count} (${pittaPercent}%)
+            Kapha (Option 3): ${option3Count} (${kaphaPercent}%)
+        `;
+
+        // Generate PDF
+        const doc = new jspdf.jsPDF();
+        doc.text(pdfContent, 10, 10);
+
+        // Ask for consent and save if given
         const consent = formData.get('consent');
         if (consent === 'Yes') {
-            // Save PDF to server (this part requires server-side code to handle the upload)
-            alert('Your responses have been saved for research purposes.');
+            // Save the PDF to the server
+            const blob = doc.output('blob');
+            const formData = new FormData();
+            formData.append('file', blob, 'prakruti_results.pdf');
+
+            try {
+                await fetch('/save_results', {
+                    method: 'POST',
+                    body: formData,
+                });
+                alert('Your results have been saved for research purposes.');
+            } catch (error) {
+                alert('Error saving results to the server.');
+                console.error(error);
+            }
         }
 
+        // Trigger PDF download for the user
         doc.save('prakruti_results.pdf');
     }
 </script>
-
-</body>
-</html>
 
