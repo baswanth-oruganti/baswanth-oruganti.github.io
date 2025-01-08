@@ -380,11 +380,6 @@
 
         // Validate all required fields
         const totalQuestions = 35;
-        for (let i = 1; i <= totalQuestions; i++) {
-            if (!formData.get(`q${i}`)) {
-                alert(`Please answer question ${i}.`);
-                return;
-            }
         }
 
         let option1Count = 0, option2Count = 0, option3Count = 0;
