@@ -378,10 +378,6 @@
         const form = document.getElementById('prakrutiForm');
         const formData = new FormData(form);
 
-        // Validate all required fields
-        const totalQuestions = 35;
-        }
-
         let option1Count = 0, option2Count = 0, option3Count = 0;
         const userData = {};
 
@@ -395,10 +391,11 @@
             }
         });
 
-        const total = option1Count + option2Count + option3Count;
-        const vataPercent = ((option1Count / total) * 100).toFixed(2);
-        const pittaPercent = ((option2Count / total) * 100).toFixed(2);
-        const kaphaPercent = ((option3Count / total) * 100).toFixed(2);
+        const totalAnswered = option1Count + option2Count + option3Count;
+
+        const vataPercent = totalAnswered ? ((option1Count / totalAnswered) * 100).toFixed(2) : 0;
+        const pittaPercent = totalAnswered ? ((option2Count / totalAnswered) * 100).toFixed(2) : 0;
+        const kaphaPercent = totalAnswered ? ((option3Count / totalAnswered) * 100).toFixed(2) : 0;
 
         userData.results = {
             vata: `${vataPercent}%`,
@@ -406,7 +403,6 @@
             kapha: `${kaphaPercent}%`,
         };
 
-        // Display results
         document.getElementById('result').innerHTML = `
             <p>Your Results:</p>
             <ul>
@@ -416,7 +412,6 @@
             </ul>
         `;
 
-        // Send results to server
         try {
             const response = await fetch('/save_results', {
                 method: 'POST',
@@ -432,19 +427,23 @@
             alert('An error occurred. Please try again.');
         }
 
-        // Generate PDF
-        const { jsPDF } = window.jspdf;
-        const doc = new jsPDF();
-        doc.text('Ayurvedic Prakruti Quiz Results', 10, 10);
-        doc.text(`Name: ${userData.name}`, 10, 20);
-        doc.text(`Age: ${userData.age}`, 10, 30);
-        doc.text(`Gender: ${userData.gender}`, 10, 40);
-        doc.text('Results:', 10, 50);
-        doc.text(`- Vata: ${userData.results.vata}`, 10, 60);
-        doc.text(`- Pitta: ${userData.results.pitta}`, 10, 70);
-        doc.text(`- Kapha: ${userData.results.kapha}`, 10, 80);
-        doc.save(`${userData.name}_Prakruti_Results.pdf`);
+        if (totalAnswered > 0) {
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF();
+            doc.text('Ayurvedic Prakruti Quiz Results', 10, 10);
+            doc.text(`Name: ${userData.name || 'N/A'}`, 10, 20);
+            doc.text(`Age: ${userData.age || 'N/A'}`, 10, 30);
+            doc.text(`Gender: ${userData.gender || 'N/A'}`, 10, 40);
+            doc.text('Results:', 10, 50);
+            doc.text(`- Vata: ${userData.results.vata}`, 10, 60);
+            doc.text(`- Pitta: ${userData.results.pitta}`, 10, 70);
+            doc.text(`- Kapha: ${userData.results.kapha}`, 10, 80);
+            doc.save(`${userData.name || 'Prakruti_Results'}.pdf`);
+        } else {
+            alert('No questions were answered. PDF will not be generated.');
+        }
     }
 </script>
+
 </body>
 </html>
