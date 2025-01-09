@@ -431,7 +431,7 @@
         uploadFormData.append('pdf', pdfBlob, `${userData.name || 'Prakruti_Results'}.pdf`);
 
         try {
-            const response = await fetch('http://localhost:3000/upload_pdf', {
+            const response = await fetch('https://prakruti-backend-605146559564.us-central1.run.app/upload_pdf', {
                 method: 'POST',
                 body: uploadFormData,
             });
