@@ -98,7 +98,7 @@
     <h2>Consent and Participant Information</h2>
     <p class="section-desc">Please provide your information and consent to use this data for research purposes.</p>
 
-    <form id="prakrutiForm" onsubmit="generatePDF(event)">
+    <form id="prakrutiForm" onsubmit="generatePDF(event)"; return false;">
         <div class="question">
             <label for="name">Name:</label>
             <input type="text" id="name" name="name" required>
@@ -371,6 +371,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
     <script>
         async function generatePDF(event) {
+	    event.preventDefault(); // Prevent the form from refreshing the page
             const form = document.getElementById('prakrutiForm');
             const formData = new FormData(form);
 
