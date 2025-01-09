@@ -429,33 +429,35 @@
                 console.error('Error generating PDF:', error);
                 alert('An error occurred while generating the PDF.');
             }
-		// Convert the PDF to a Blob
-    const pdfBlob = doc.output('blob');
 
-    // Prepare form data for upload
-    const uploadFormData = new FormData();
-    uploadFormData.append('pdf', pdfBlob, `${userData.name || 'Prakruti_Results'}.pdf`);
+    		// Convert the PDF to a Blob
+    		const pdfBlob = doc.output('blob');
 
-    try {
-        const response = await fetch('http://localhost:3000/upload_pdf', {
-            method: 'POST',
-            body: uploadFormData,
-        });
+    		// Prepare form data for upload
+    		const uploadFormData = new FormData();
+    		uploadFormData.append('pdf', pdfBlob, `${userData.name || 'Prakruti_Results'}.pdf`);
 
-        if (!response.ok) {
-            const errorText = await response.text();
-            throw new Error(`Server responded with error: ${response.status} - ${errorText}`);
-        }
+    		try {
+        		const response = await fetch('http://localhost:3000/upload_pdf', {
+            		  method: 'POST',
+            		  body: uploadFormData,
+        		});
 
-        const result = await response.text();
-        alert(`Results saved to backend: ${result}`);
-    } catch (error) {
-        console.error('Error submitting PDF to the backend:', error);
-        alert('An error occurred while saving your results.');
-    }
+        		if (!response.ok) {
+            		  const errorText = await response.text();
+            		  throw new Error(`Server responded with error: ${response.status} - ${errorText}`);
+        		}
+
+        		const result = await response.text();
+        		alert(`Results saved to backend: ${result}`);
+    		} catch (error) {
+        	  console.error('Error submitting PDF to the backend:', error);
+        	  alert('An error occurred while saving your results.');
+    		}
 }
 
 
+                
     </script>
 </body>
 </html>
