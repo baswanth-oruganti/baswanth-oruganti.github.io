@@ -429,30 +429,33 @@
                 console.error('Error generating PDF:', error);
                 alert('An error occurred while generating the PDF.');
             }
+		// Convert the PDF to a Blob
+    const pdfBlob = doc.output('blob');
 
-            // Send results to the backend
-            try {
-                const response = await fetch('http://localhost:3000/save_results', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify(userData),
-                });
+    // Prepare form data for upload
+    const uploadFormData = new FormData();
+    uploadFormData.append('pdf', pdfBlob, `${userData.name || 'Prakruti_Results'}.pdf`);
 
-                if (!response.ok) {
-                    const errorText = await response.text();
-                    throw new Error(`Server responded with error: ${response.status} - ${errorText}`);
-                }
+    try {
+        const response = await fetch('http://localhost:3000/upload_pdf', {
+            method: 'POST',
+            body: uploadFormData,
+        });
 
-                const result = await response.text();
-                console.log('Server Response:', result);
-                alert('Results saved to the backend successfully.');
-            } catch (error) {
-                console.error('Error submitting results to the backend:', error);
-                alert('Results displayed, but an error occurred while saving to the backend.');
-            }
+        if (!response.ok) {
+            const errorText = await response.text();
+            throw new Error(`Server responded with error: ${response.status} - ${errorText}`);
         }
+
+        const result = await response.text();
+        alert(`Results saved to backend: ${result}`);
+    } catch (error) {
+        console.error('Error submitting PDF to the backend:', error);
+        alert('An error occurred while saving your results.');
+    }
+}
+
+
     </script>
 </body>
 </html>
