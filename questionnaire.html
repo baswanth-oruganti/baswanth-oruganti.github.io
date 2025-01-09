@@ -96,8 +96,8 @@
 <div class="container">
     <h2>Consent and Participant Information</h2>
     <p class="section-desc">Please provide your information and consent to use this data for research purposes.</p>
+    <form id="prakrutiForm" action="https://prakruti-backend-605146559564.us-central1.run.app/save_results" method="POST" onsubmit="generatePDF(event); return false">
 
-    <form id="prakrutiForm" onsubmit="generatePDF(event); return false;">
         <div class="question">
             <label for="name">Name:</label>
             <input type="text" id="name" name="name" required>
