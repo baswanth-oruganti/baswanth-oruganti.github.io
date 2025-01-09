@@ -364,101 +364,91 @@
         </div>
 	<button type="submit">Submit</button>
         </form>
-
         <div class="result" id="result"></div>
-    </div>
+</div>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
-    <script>
-        async function generatePDF(event) {
-	    event.preventDefault(); // Prevent the form from refreshing the page
-            const form = document.getElementById('prakrutiForm');
-            const formData = new FormData(form);
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+<script>
+    async function generatePDF(event) {
+        event.preventDefault(); // Prevent the form from refreshing the page
 
-            let option1Count = 0, option2Count = 0, option3Count = 0;
-            const userData = {};
+        const form = document.getElementById('prakrutiForm');
+        const formData = new FormData(form);
 
-            // Collect form data
-            formData.forEach((value, key) => {
-                if (['name', 'age', 'gender', 'consent'].includes(key)) {
-                    userData[key] = value;
-                } else {
-                    if (value === '1') option1Count++;
-                    if (value === '2') option2Count++;
-                    if (value === '3') option3Count++;
-                }
+        let option1Count = 0, option2Count = 0, option3Count = 0;
+        const userData = {};
+
+        // Collect form data
+        formData.forEach((value, key) => {
+            if (['name', 'age', 'gender', 'consent'].includes(key)) {
+                userData[key] = value;
+            } else {
+                if (value === '1') option1Count++;
+                if (value === '2') option2Count++;
+                if (value === '3') option3Count++;
+            }
+        });
+
+        // Calculate percentages
+        const totalAnswered = option1Count + option2Count + option3Count;
+        const vataPercent = totalAnswered ? ((option1Count / totalAnswered) * 100).toFixed(2) : 0;
+        const pittaPercent = totalAnswered ? ((option2Count / totalAnswered) * 100).toFixed(2) : 0;
+        const kaphaPercent = totalAnswered ? ((option3Count / totalAnswered) * 100).toFixed(2) : 0;
+
+        userData.results = {
+            vata: `${vataPercent}%`,
+            pitta: `${pittaPercent}%`,
+            kapha: `${kaphaPercent}%`,
+        };
+
+        // Display results to the user
+        document.getElementById('result').innerHTML = `
+            <p>Your Results:</p>
+            <ul>
+                <li>Vata: ${vataPercent}%</li>
+                <li>Pitta: ${pittaPercent}%</li>
+                <li>Kapha: ${kaphaPercent}%</li>
+            </ul>
+        `;
+
+        // Generate and download PDF
+        const { jsPDF } = window.jspdf;
+        const doc = new jsPDF();
+        doc.text('Ayurvedic Prakruti Quiz Results', 10, 10);
+        doc.text(`Name: ${userData.name || 'N/A'}`, 10, 20);
+        doc.text(`Age: ${userData.age || 'N/A'}`, 10, 30);
+        doc.text(`Gender: ${userData.gender || 'N/A'}`, 10, 40);
+        doc.text('Results:', 10, 50);
+        doc.text(`- Vata: ${userData.results.vata}`, 10, 60);
+        doc.text(`- Pitta: ${userData.results.pitta}`, 10, 70);
+        doc.text(`- Kapha: ${userData.results.kapha}`, 10, 80);
+
+        // Save the PDF locally
+        doc.save(`${userData.name || 'Prakruti_Results'}.pdf`);
+
+        // Upload the PDF to the backend
+        const pdfBlob = doc.output('blob');
+        const uploadFormData = new FormData();
+        uploadFormData.append('pdf', pdfBlob, `${userData.name || 'Prakruti_Results'}.pdf`);
+
+        try {
+            const response = await fetch('http://localhost:3000/upload_pdf', {
+                method: 'POST',
+                body: uploadFormData,
             });
 
-            // Calculate percentages
-            const totalAnswered = option1Count + option2Count + option3Count;
-
-            const vataPercent = totalAnswered ? ((option1Count / totalAnswered) * 100).toFixed(2) : 0;
-            const pittaPercent = totalAnswered ? ((option2Count / totalAnswered) * 100).toFixed(2) : 0;
-            const kaphaPercent = totalAnswered ? ((option3Count / totalAnswered) * 100).toFixed(2) : 0;
-
-            userData.results = {
-                vata: `${vataPercent}%`,
-                pitta: `${pittaPercent}%`,
-                kapha: `${kaphaPercent}%`,
-            };
-
-            // Display results to the user
-            document.getElementById('result').innerHTML = `
-                <p>Your Results:</p>
-                <ul>
-                    <li>Vata: ${vataPercent}%</li>
-                    <li>Pitta: ${pittaPercent}%</li>
-                    <li>Kapha: ${kaphaPercent}%</li>
-                </ul>
-            `;
-
-            // Generate and download PDF
-            try {
-                const { jsPDF } = window.jspdf;
-                const doc = new jsPDF();
-                doc.text('Ayurvedic Prakruti Quiz Results', 10, 10);
-                doc.text(`Name: ${userData.name || 'N/A'}`, 10, 20);
-                doc.text(`Age: ${userData.age || 'N/A'}`, 10, 30);
-                doc.text(`Gender: ${userData.gender || 'N/A'}`, 10, 40);
-                doc.text('Results:', 10, 50);
-                doc.text(`- Vata: ${userData.results.vata}`, 10, 60);
-                doc.text(`- Pitta: ${userData.results.pitta}`, 10, 70);
-                doc.text(`- Kapha: ${userData.results.kapha}`, 10, 80);
-                doc.save(`${userData.name || 'Prakruti_Results'}.pdf`);
-            } catch (error) {
-                console.error('Error generating PDF:', error);
-                alert('An error occurred while generating the PDF.');
+            if (!response.ok) {
+                const errorText = await response.text();
+                throw new Error(`Server responded with error: ${response.status} - ${errorText}`);
             }
 
-    		// Convert the PDF to a Blob
-    		const pdfBlob = doc.output('blob');
-
-    		// Prepare form data for upload
-    		const uploadFormData = new FormData();
-    		uploadFormData.append('pdf', pdfBlob, `${userData.name || 'Prakruti_Results'}.pdf`);
-
-    		try {
-        		const response = await fetch('http://localhost:3000/upload_pdf', {
-            		  method: 'POST',
-            		  body: uploadFormData,
-        		});
-
-        		if (!response.ok) {
-            		  const errorText = await response.text();
-            		  throw new Error(`Server responded with error: ${response.status} - ${errorText}`);
-        		}
-
-        		const result = await response.text();
-        		alert(`Results saved to backend: ${result}`);
-    		} catch (error) {
-        	  console.error('Error submitting PDF to the backend:', error);
-        	  alert('An error occurred while saving your results.');
-    		}
-}
-
-
-                
-    </script>
+            const result = await response.text();
+            alert(`Results saved to backend: ${result}`);
+        } catch (error) {
+            console.error('Error submitting PDF to the backend:', error);
+            alert('An error occurred while saving your results.');
+        }
+    }
+</script>
 </body>
 </html>
-
