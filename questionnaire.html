@@ -427,6 +427,13 @@
             alert('An error occurred. Please try again.');
         }
 
+            const errorText = await response.text();
+            console.error('Error response from server:', errorText);
+            alert(`Error saving results: ${errorText}`);
+            return;
+        }
+
+
         if (totalAnswered > 0) {
             const { jsPDF } = window.jspdf;
             const doc = new jsPDF();
