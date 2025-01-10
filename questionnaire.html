@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ayurvedic Prakruti Quiz</title>
+    <title>Ayurvedic Prakruti Analysis</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -413,7 +413,7 @@
         // Generate and download PDF
         const { jsPDF } = window.jspdf;
         const doc = new jsPDF();
-        doc.text('Ayurvedic Prakruti Quiz Results', 10, 10);
+        doc.text('Ayurvedic Prakruti Analysis Results', 10, 10);
         doc.text(`Name: ${userData.name || 'N/A'}`, 10, 20);
         doc.text(`Age: ${userData.age || 'N/A'}`, 10, 30);
         doc.text(`Gender: ${userData.gender || 'N/A'}`, 10, 40);
