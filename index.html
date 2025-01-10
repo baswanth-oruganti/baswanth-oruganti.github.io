@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Personal website of Baswanth Oruganti, Associate Professor at Chanakya University, showcasing research, publications, and teaching areas.">
-    <title>Baswanth Oruganti - Personal Website</title>
+    <title>Baswanth Oruganti - Academic Portfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
     <style>
         body {
             font-family: "Roboto", Arial, sans-serif;
@@ -12,10 +13,10 @@
             margin: 0;
             padding: 0;
             color: #333;
-            background-color: #f9f9f9;
+            background-color: #f7f7f7;
         }
         header {
-            background: linear-gradient(to right, #004d99, #1e90ff);
+            background: linear-gradient(to right, #0d47a1, #42a5f5);
             color: #fff;
             padding: 20px 0;
             text-align: center;
@@ -26,19 +27,31 @@
         }
         header p {
             font-size: 1.2em;
+            margin: 5px 0 0;
         }
         .container {
-            max-width: 900px;
+            max-width: 1100px;
             margin: 20px auto;
             background: #fff;
             padding: 20px;
-            border-radius: 10px;
+            border-radius: 8px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
         .container h2 {
-            border-bottom: 2px solid #ddd;
-            padding-bottom: 5px;
-            color: #004d99;
+            border-bottom: 3px solid #0d47a1;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+            color: #0d47a1;
+        }
+        .project {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 20px;
+        }
+        .project img {
+            max-width: 200px;
+            margin-right: 20px;
+            border-radius: 8px;
         }
         ul {
             padding-left: 20px;
@@ -47,7 +60,7 @@
             margin-bottom: 10px;
         }
         a {
-            color: #1e90ff;
+            color: #0d47a1;
             text-decoration: none;
         }
         a:hover {
@@ -57,12 +70,12 @@
             text-align: center;
             padding: 10px;
             margin-top: 20px;
-            background: #004d99;
+            background: #0d47a1;
             color: #fff;
             font-size: 0.9em;
         }
         footer a {
-            color: #00c6ff;
+            color: #82b1ff;
             text-decoration: none;
         }
         footer a:hover {
@@ -72,24 +85,21 @@
 </head>
 <body>
     <header>
-        <h1>Baswanth Oruganti</h1>
-        <p>Associate Professor, School of Mathematics and Natural Sciences, Chanakya University</p>
+        <h1>Dr. Baswanth Oruganti</h1>
+        <p>Associate Professor in Chemistry | School of Mathematics and Natural Sciences | Chanakya University</p>
     </header>
 
     <div class="container">
         <h2>About Me</h2>
-        <p>Hello! I am Baswanth Oruganti. I currently work as an Associate Professor in the School of Mathematics and Natural Sciences at Chanakya University, and I am based in Bangalore. My main research interests include Quantum Chemistry, Computational Photochemistry, and Quantum Computing. I am passionate about teaching and research, with a particular focus on molecular design, quantum simulations, and aromaticity analysis.</p>
+        <p>Hello! I am Dr. Baswanth Oruganti, currently working as an Associate Professor in Chemistry at Chanakya University. Based in Bangalore, I am passionate about interdisciplinary research and teaching, focusing particularly on molecular design, reaction mechanism using quantum chemistry simulations, excited-state aromaticity, and quantum computing. </p>
 
-        <h2>Previous Job Experience</h2>
-        <p>Assistant Professor at SRM University-AP (Mangalagiri): 2022-2024</p>
-        <p>Assistant Professor at GITAM University (Visakhapatnam): 2017-2019</p>
-        <p>Scientist-C at ISRO Satellite Centre (Bengaluru): 2010-2011</p>
-        
         <h2>Education</h2>
-        <p>B.Sc.: Acharya Nagarjuna University, India; 2004-2007</p>
-        <p>M.Sc.: IIT Guwahati, India; 2008-2010</p>
-        <p>Ph.D.: Linköping University, Sweden; 2012-2016</p>
-        <p>Post-Doctoral Research: Linnaeus University, Sweden; 2019-2021</p>
+        <ul>
+            <li><strong>Ph.D.</strong>: Linköping University, Sweden (2012-2016)</li>
+            <li><strong>Post-Doctoral Research</strong>: Linnaeus University, Sweden (2019-2021)</li>
+            <li><strong>M.Sc.</strong>: IIT Guwahati, India (2008-2010)</li>
+            <li><strong>B.Sc.</strong>: Acharya Nagarjuna University, India (2004-2007)</li>
+        </ul>
 
         <h2>Research Interests</h2>
         <ul>
@@ -97,34 +107,41 @@
             <li>Computational Chemistry</li>
             <li>Molecular Design for Solar Energy Storage Applications</li>
             <li>Non-Covalent Interactions and Aromaticity Analysis</li>
-            <li>Parallels between concepts of Inflammaging and Ayurveda Prakruti</li>
+            <li>Parallels between Concepts of Inflammaging and Ayurveda Prakruti</li>
         </ul>
         <p><a href="questionnaire.html">Take the Ayurvedic Prakruti Questionnaire</a></p>
 
-        <h2>Teaching Areas</h2>
-        <ul>
-            <li>Physical Chemistry</li>
-            <li>Quantum Chemistry</li>
-            <li>Molecular Spectroscopy</li>
-            <li>Engineering Chemistry</li>
-        </ul>
+        <h2>Ongoing Projects</h2>
+        <div class="project">
+            <img src="project_image1.png" alt="Project Image">
+            <div>
+                <h3>Integrating Valence Bond Theory with Quantum Computing Algorithms for Accurate Quantum Chemistry Simulations</h3>
+                <p> In this project, our aim is to explore how Valence Bond Theory (VBT) methods such as breathing orbital valence bond (BOVB) method can be integrated into Full Configuration Interaction calculations in the framework of Quantum Phase Estimation (QPE) algorithm implemented on Quantum Computers. This would faciliate accurate simulations of chemical reactions and design of novel molecules and materials.</p>
+            </div>
+        </div>
+        <div class="project">
+            <img src="project_image2.jpg" alt="Project Image">
+            <div>
+                <h3>Photochromic Diarylethenes for Molecular Solar Thermal Energy Storage</h3>
+                <p> In this ongoing project, we are investigating diarylethene molecular photoswitches, such as diarylbenzenes and diarylbenzoheteroarenes, to optimize several important design criteria for their applications in efficient solar energy capture and storage using computational quantum chemical methods. Specifically, we focus on important criteria such as good absorption properties, excellent photochemical reactivity, high fatigue resistance, large eneergy-storage density and prolonged energy-storage time. </p>
+            </div>
+        </div>
 
         <h2>Publications</h2>
         <ul>
-            <li>Research publications on <a href="https://scholar.google.com/citations?user=wsMWCEIAAAAJ&hl=en" target="_blank">Google Scholar</a></li>
-            <li>Research articles indexed on <a href="https://www.scopus.com/authid/detail.uri?authorId=56041496100" target="_blank">Scopus</a></li>
+            <li>Google Scholar: <a href="https://scholar.google.com/citations?user=wsMWCEIAAAAJ&hl=en" target="_blank">Research Publications</a></li>
+            <li>Scopus: <a href="https://www.scopus.com/authid/detail.uri?authorId=56041496100" target="_blank">Indexed Articles</a></li>
         </ul>
 
         <h2>Contact</h2>
         <p>Email: <a href="mailto:baswanth.oruganti@gmail.com">baswanth.oruganti@gmail.com</a></p>
         <p>Twitter: <a href="https://twitter.com/BaswanthQuantum" target="_blank">@BaswanthQuantum</a></p>
-        <p>ORCID: <a href="https://orcid.org/0000-0002-4199-2750" target="_blank">https://orcid.org/0000-0002-4199-2750</a></p>
         <p>LinkedIn: <a href="https://linkedin.com/in/baswanth-oruganti-558a76234/" target="_blank">linkedin.com/in/baswanth-oruganti</a></p>
         <p>GitHub: <a href="https://github.com/baswanth-oruganti" target="_blank">github.com/baswanth-oruganti</a></p>
     </div>
 
     <footer>
-        <p>Copyright &copy; 2025 Baswanth Oruganti. Designed with ❤️. <a href="https://github.com/baswanth-oruganti" target="_blank">GitHub</a></p>
+        <p>&copy; 2025 Dr. Baswanth Oruganti. All rights reserved.</p>
     </footer>
 </body>
 </html>
