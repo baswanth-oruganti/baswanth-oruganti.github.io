@@ -107,6 +107,10 @@
             <input type="number" id="age" name="age" required>
         </div>
         <div class="question">
+            <label for="mobile">Mobile number:</label>
+            <input type="number" id="mobile" name="mobile" required>
+        </div>
+        <div class="question">
             <label for="gender">Gender:</label>
             <select id="gender" name="gender" required>
                 <option value="Male">Male</option>
@@ -379,7 +383,7 @@
 
         // Collect form data
         formData.forEach((value, key) => {
-            if (['name', 'age', 'gender', 'consent'].includes(key)) {
+            if (['name', 'age', 'mobile','gender', 'consent'].includes(key)) {
                 userData[key] = value;
             } else {
                 if (value === '1') option1Count++;
@@ -416,11 +420,12 @@
         doc.text('Ayurvedic Prakruti Analysis Results', 10, 10);
         doc.text(`Name: ${userData.name || 'N/A'}`, 10, 20);
         doc.text(`Age: ${userData.age || 'N/A'}`, 10, 30);
-        doc.text(`Gender: ${userData.gender || 'N/A'}`, 10, 40);
-        doc.text('Results:', 10, 50);
-        doc.text(`- Vata: ${userData.results.vata}`, 10, 60);
-        doc.text(`- Pitta: ${userData.results.pitta}`, 10, 70);
-        doc.text(`- Kapha: ${userData.results.kapha}`, 10, 80);
+        doc.text(`Age: ${userData.mobile || 'N/A'}`, 10, 40);
+        doc.text(`Gender: ${userData.gender || 'N/A'}`, 10, 50);
+        doc.text('Results:', 10, 60);
+        doc.text(`- Vata: ${userData.results.vata}`, 10, 70);
+        doc.text(`- Pitta: ${userData.results.pitta}`, 10, 80);
+        doc.text(`- Kapha: ${userData.results.kapha}`, 10, 90);
 
         // Save the PDF locally
         doc.save(`${userData.name || 'Prakruti_Results'}.pdf`);
