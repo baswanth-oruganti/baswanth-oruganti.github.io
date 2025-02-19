@@ -1,0 +1,14 @@
+.project {
+    display: flex;
+    flex-direction: column; /* Stacks content vertically */
+    align-items: center; /* Centers the image */
+    text-align: center; /* Centers text */
+}
+
+.project img {
+    width: 100%; /* Adjust width as needed */
+    max-width: 600px; /* Prevents image from being too large */
+    height: auto;
+    margin-top: 10px; /* Adds space between text and image */
+}
+
