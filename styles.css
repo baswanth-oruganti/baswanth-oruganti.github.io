@@ -1,13 +1,19 @@
 .project {
     display: flex;
-    flex-direction: column; /* Stacks content vertically */
-    align-items: flex-start; /* Centers the image */
+    flex-direction: column;
+    align-items: flex-start; /* Ensures text stays left-aligned */
+    text-align: left; /* Explicitly sets text alignment */
+}
+
+.project div {
+    width: 100%; /* Ensures text does not get constrained */
 }
 
 .project img {
     width: 100%; /* Adjust width as needed */
-    max-width: 600px; /* Prevents image from being too large */
+    max-width: 600px; /* Prevents excessive size */
     height: auto;
-    margin-top: 10px; /* Adds space between text and image */
+    display: block;
+    margin: 10px auto; /* Centers only the image */
 }
 
