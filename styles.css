@@ -1,8 +1,7 @@
 .project {
     display: flex;
     flex-direction: column; /* Stacks content vertically */
-    align-items: center; /* Centers the image */
-    text-align: center; /* Centers text */
+    align-items: flex-start; /* Centers the image */
 }
 
 .project img {
