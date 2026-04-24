@@ -474,7 +474,10 @@
     <div class="torus-wrap">
       <video id="torusVideo" autoplay loop muted playsinline controls preload="auto"
              style="display:block;width:100%;height:auto;max-height:520px;object-fit:cover;">
-        <source src="clifford_torus_anim.mp4" type="video/mp4">
+        <!-- WebM/VP9 first: best quality on Android Chrome -->
+        <source src="clifford_torus_anim.webm" type="video/webm; codecs=vp9">
+        <!-- H.264 Baseline/Main for iOS Safari and older Android -->
+        <source src="clifford_torus_anim.mp4" type="video/mp4; codecs=avc1.42E01E">
       </video>
       <div id="torusError" style="display:none;padding:2.5rem;text-align:center;
            background:var(--navy);color:rgba(255,255,255,0.55);font-size:0.93rem;">
@@ -486,7 +489,7 @@
       <div class="torus-caption">
         <span class="torus-caption-badge">Singular Set &Sigma;</span>
         <div class="torus-caption-text">
-          <strong>The Clifford Torus T&sup2; &subset; S&sup3; — Topological Barrier in TOPCT</strong>
+          <strong>The Clifford Torus T&sup2; &subset; S&sup3; — Topological Barrier in Forbidden Electrocyclic Reactions</strong>
           <span>
             The Clifford torus is the equatorial singular set separating the two
             connected components of the frontier orbital Bloch sphere.
