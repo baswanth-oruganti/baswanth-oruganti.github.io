@@ -209,26 +209,32 @@
 
     /* ── Clifford torus video ────────────────────────────────────── */
     .torus-wrap {
-      position: relative;
       border-radius: 10px;
       background: var(--navy);
       box-shadow: 0 4px 32px rgba(30,45,64,0.18);
       border: 1px solid rgba(224,112,16,0.15);
-      /* overflow:hidden + border-radius blacks out video on Android Chrome */
-      overflow: visible;
     }
-    .torus-wrap video {
+    #torusVideo {
       display: block;
       width: 100%;
       height: auto;
-      /* object-fit:cover breaks Android Chrome video rendering */
-      object-fit: fill;
       border-radius: 10px 10px 0 0;
-      /* Force GPU layer — fixes black frame compositing bug on Android */
+      /* translateZ forces own GPU compositing layer on Android */
       -webkit-transform: translateZ(0);
       transform: translateZ(0);
-      /* Remove max-height constraint that confuses Android video renderer */
+      background: #000;
     }
+    #torusError {
+      display: none;
+      padding: 2.5rem;
+      text-align: center;
+      background: var(--navy);
+      color: rgba(255,255,255,0.55);
+      font-size: 0.93rem;
+      border-radius: 10px 10px 0 0;
+    }
+    .torus-error-icon { font-size: 2rem; margin-bottom: 0.6rem; }
+    #torusError code { color: var(--amber3); }
     .torus-caption {
       display: flex; align-items: flex-start; gap: 1rem;
       padding: 1.1rem 1.6rem;
@@ -473,31 +479,20 @@
 
   <!-- Clifford Torus is an Example of a Fibre Bundle under the Hopf Fibration Map between S&sup3 and S&sup2 -->
   <section id="torus">
-    <div class="section-label"><h2>Clifford Torus is an Example of a Fibre Bundle under the Hopf Fibration Map between S&sup3 and S&sup2</h2></div>
+    <div class="section-label"><h2>Clifford Torus is an Example of a Fibre Bundle under the Hopf Fibration Map between S&sup3; and S&sup2;</h2></div>
     <div class="torus-wrap">
-      <video id="torusVideo" autoplay loop muted playsinline controls preload="auto"
-             style="display:block;width:100%;height:auto;max-height:520px;object-fit:cover;">
+      <video id="torusVideo" autoplay loop muted playsinline preload="auto">
         <source src="clifford_torus_anim.mp4" type="video/mp4">
       </video>
-      <div id="torusError" style="display:none;padding:2.5rem;text-align:center;
-           background:var(--navy);color:rgba(255,255,255,0.55);font-size:0.93rem;">
-        <div style="font-size:2rem;margin-bottom:0.6rem;">▶</div>
-        Video could not be loaded. Please ensure
-        <code style="color:var(--amber3);">clifford_torus_anim.mp4</code>
-        is in the same folder as this page.
+      <div id="torusError">
+        <div class="torus-error-icon">▶</div>
+        <p>Video could not be loaded — ensure <code>clifford_torus_anim.mp4</code> is in the same folder.</p>
       </div>
       <div class="torus-caption">
         <span class="torus-caption-badge">Singular Set &Sigma;</span>
         <div class="torus-caption-text">
           <strong>The Clifford Torus T&sup2; &subset; S&sup3; — Topological Barrier in TOPCT</strong>
-          <span>
-            The Clifford torus is the equatorial singular set separating the two
-            connected components of the frontier orbital Bloch sphere.
-            It represents the HOMO-LUMO degeneracy locus — the Coulson-Fischer point —
-            at which the coveted generator becomes accessible and symmetry breaking occurs.
-            Woodward-Hoffmann forbidden reactions correspond to paths that must cross
-            this topological barrier.
-          </span>
+          <span>The Clifford torus is the equatorial singular set separating the two connected components of the frontier orbital Bloch sphere. It represents the HOMO-LUMO degeneracy locus — the Coulson-Fischer point — at which the coveted generator becomes accessible and symmetry breaking occurs. Woodward-Hoffmann forbidden reactions correspond to paths that must cross this topological barrier.</span>
         </div>
       </div>
     </div>
@@ -507,14 +502,11 @@
       var v = document.getElementById('torusVideo');
       var err = document.getElementById('torusError');
       if (!v) return;
+      err.style.display = 'none';
 
       function tryPlay() {
         var p = v.play();
-        if (p !== undefined) {
-          p.catch(function() {
-            /* autoplay blocked — controls already visible so user can tap play */
-          });
-        }
+        if (p !== undefined) p.catch(function(){});
       }
 
       v.addEventListener('error', function() {
@@ -522,20 +514,16 @@
         err.style.display = 'block';
       });
 
-      /* Fire on both events to catch iOS timing differences */
-      v.addEventListener('loadedmetadata', tryPlay);
+      v.addEventListener('canplaythrough', tryPlay);
       v.addEventListener('loadeddata', tryPlay);
-      v.addEventListener('canplay', tryPlay);
-
-      /* If already ready when script runs */
-      if (v.readyState >= 2) tryPlay();
+      if (v.readyState >= 3) tryPlay();
 
       setTimeout(function() {
         if (v.readyState === 0 && v.networkState === 3) {
           v.style.display = 'none';
           err.style.display = 'block';
         }
-      }, 4000);
+      }, 5000);
     })();
   </script>
 
