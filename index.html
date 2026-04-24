@@ -218,6 +218,12 @@
       display: block; width: 100%; height: auto;
       max-height: 520px; object-fit: cover;
     }
+    /* Hide native controls on desktop — autoplay works silently */
+    @media (min-width: 901px) {
+      .torus-wrap video:not([data-controls-needed]) {
+        pointer-events: none;
+      }
+    }
     .torus-caption {
       display: flex; align-items: flex-start; gap: 1rem;
       padding: 1.1rem 1.6rem;
@@ -458,7 +464,7 @@
       <strong>Mathematical Optimization</strong>.
       My work focuses on the geometric and topological structures underlying symmetry-breaking transitions
       in molecular systems and nonlinear optimization landscapes — areas where Differential Geometry,
-      Lie Group Theory, and Electronic Structure Theory converge.An example of a Topological Barrier is a Clifford Torus shown below, which forms an obstruction between Aromatic and Antiaromatic TSs under the spin-symmetry constraint.
+      Lie Group Theory, and Electronic Structure Theory converge. An example of a Topological Barrier is a Clifford Torus shown below, which forms an obstruction between Aromatic and Antiaromatic TSs under the spin-symmetry constraint.
     </p>
   </section>
 
@@ -466,7 +472,7 @@
   <section id="torus">
     <div class="section-label"><h2>Clifford Torus is an Example of a Fibre Bundle under the Hopf Fibration Map between S&sup3 and S&sup2</h2></div>
     <div class="torus-wrap">
-      <video id="torusVideo" loop muted playsinline preload="auto"
+      <video id="torusVideo" autoplay loop muted playsinline controls preload="auto"
              style="display:block;width:100%;height:auto;max-height:520px;object-fit:cover;">
         <source src="clifford_torus_anim.mp4" type="video/mp4">
       </video>
@@ -498,28 +504,35 @@
       var v = document.getElementById('torusVideo');
       var err = document.getElementById('torusError');
       if (!v) return;
-      // Show error if video fails to load
+
+      function tryPlay() {
+        var p = v.play();
+        if (p !== undefined) {
+          p.catch(function() {
+            /* autoplay blocked — controls already visible so user can tap play */
+          });
+        }
+      }
+
       v.addEventListener('error', function() {
         v.style.display = 'none';
         err.style.display = 'block';
       });
-      v.addEventListener('loadedmetadata', function() {
-        // Attempt programmatic play to handle autoplay policies
-        var p = v.play();
-        if (p !== undefined) {
-          p.catch(function() {
-            // Autoplay blocked — add controls so user can start manually
-            v.setAttribute('controls', '');
-          });
-        }
-      });
-      // If src is empty or file missing, error fires; also check after short delay
+
+      /* Fire on both events to catch iOS timing differences */
+      v.addEventListener('loadedmetadata', tryPlay);
+      v.addEventListener('loadeddata', tryPlay);
+      v.addEventListener('canplay', tryPlay);
+
+      /* If already ready when script runs */
+      if (v.readyState >= 2) tryPlay();
+
       setTimeout(function() {
         if (v.readyState === 0 && v.networkState === 3) {
           v.style.display = 'none';
           err.style.display = 'block';
         }
-      }, 3000);
+      }, 4000);
     })();
   </script>
 
