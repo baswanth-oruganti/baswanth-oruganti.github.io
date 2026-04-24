@@ -341,7 +341,7 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      padding: 2.5rem 1rem 2rem;
+      padding: 2rem 1rem 1.6rem;
       margin-bottom: 1.8rem;
       background: linear-gradient(160deg, #fffdf9 0%, #fef7ee 60%, #fdf3e4 100%);
       border-radius: 12px;
@@ -359,26 +359,26 @@
       pointer-events: none;
     }
     .logo-showcase img {
-      width: 280px;
-      height: 280px;
+      width: 420px;
+      height: 420px;
       object-fit: contain;
       border-radius: 50%;
-      border: 3px solid rgba(224,112,16,0.20);
+      border: 3px solid rgba(224,112,16,0.22);
       box-shadow:
-        0 0 0 8px rgba(224,112,16,0.06),
-        0 12px 40px rgba(30,45,64,0.14);
+        0 0 0 10px rgba(224,112,16,0.07),
+        0 16px 48px rgba(30,45,64,0.13);
       position: relative;
       z-index: 1;
       transition: transform 0.4s ease, box-shadow 0.4s ease;
     }
     .logo-showcase img:hover {
-      transform: scale(1.03);
+      transform: scale(1.02);
       box-shadow:
-        0 0 0 12px rgba(224,112,16,0.09),
-        0 16px 50px rgba(30,45,64,0.18);
+        0 0 0 16px rgba(224,112,16,0.08),
+        0 20px 60px rgba(30,45,64,0.17);
     }
     .logo-showcase-caption {
-      margin-top: 1.3rem;
+      margin-top: 1.1rem;
       text-align: center;
       position: relative;
       z-index: 1;
@@ -399,6 +399,16 @@
 
     /* ── Programme grid ──────────────────────────────────────────── */
     .programme-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: var(--stone);
+      border-radius: var(--radius);
+      overflow: hidden;
+      border: 1px solid var(--stone);
+    }
+
+    /* ── Two column layout ───────────────────────────────────────── */
     .two-col {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -498,41 +508,45 @@
     .pub-link:hover { background: var(--navy3); transform: translateY(-1px); }
     .pub-link svg { opacity: 0.7; }
 
-    /* ── Contact ─────────────────────────────────────────────────── */
-    .contact-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 1rem;
+    /* ── Contact bar ─────────────────────────────────────────────── */
+    .contact-bar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+      align-items: center;
     }
-    .contact-card {
+    .contact-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
       background: var(--white);
       border: 1px solid var(--stone);
-      border-radius: var(--radius);
-      padding: 1.1rem;
-      text-align: center;
+      border-radius: 30px;
+      padding: 0.45rem 1.1rem 0.45rem 0.7rem;
       text-decoration: none;
       color: var(--muted);
-      font-size: 0.83rem;
+      font-size: 0.84rem;
       font-weight: 500;
-      transition: border-color 0.2s, color 0.2s, transform 0.2s;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 0.5rem;
+      transition: border-color 0.2s, color 0.2s, background 0.2s;
     }
-    .contact-card:hover {
+    .contact-pill:hover {
       border-color: var(--amber);
       color: var(--navy);
-      transform: translateY(-2px);
+      background: #fffaf5;
     }
-    .contact-icon {
-      width: 36px; height: 36px;
-      background: var(--cream);
+    .contact-pill-icon {
+      width: 22px; height: 22px;
+      background: var(--stone);
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 1.1rem;
+      font-size: 0.75rem;
+      flex-shrink: 0;
+      transition: background 0.2s;
+    }
+    .contact-pill:hover .contact-pill-icon {
+      background: rgba(224,112,16,0.12);
     }
 
     /* ── Footer ──────────────────────────────────────────────────── */
@@ -565,7 +579,8 @@
       .programme-grid { grid-template-columns: 1fr; }
       .two-col { grid-template-columns: 1fr; }
       .research-list { grid-template-columns: 1fr; }
-      .contact-grid { grid-template-columns: repeat(2, 1fr); }
+      .logo-showcase img { width: 260px; height: 260px; }
+      .contact-bar { gap: 0.5rem; }
     }
   </style>
 </head>
@@ -591,14 +606,14 @@
       <div class="title-line">Theoretical Chemist · Quantum Chemistry · Quantum Computing · Optimization</div>
       <h1>Dr. Baswanth Oruganti</h1>
       <p>
-        I work at the intersection of <strong style="color:rgba(255,255,255,0.85)">Topology</strong>,
-        <strong style="color:rgba(255,255,255,0.85)">Lie Theory</strong>, and
-        <strong style="color:rgba(255,255,255,0.85)">Quantum Computing</strong>,
+        I work at the intersection of <strong style="color:rgba(255,255,255,0.85)">topology</strong>,
+        <strong style="color:rgba(255,255,255,0.85)">Lie theory</strong>, and
+        <strong style="color:rgba(255,255,255,0.85)">quantum computing</strong>,
         developing geometric frameworks for understanding fundamental constraints
         in electronic structure theory and optimization algorithms.
       </p>
       <div class="hero-tagline">
-        Physical or Chemical Constraints as Quotient Maps. The coveted generator is the Missing Lie Algebra Element.
+        Physical constraints are quotient maps. The coveted generator is the missing Lie algebra element.
       </div>
       <div class="hero-links">
         <a href="https://orcid.org/0000-0002-4199-2750" target="_blank">ORCID</a>
@@ -623,8 +638,8 @@
     <div class="section-label"><h2>About</h2></div>
     <p class="about-text">
       I am a theoretical chemist with research interests spanning
-      <strong>Quantum Chemistry</strong>, <strong>Quantum Computing Algorithms</strong>, and
-      <strong>Mathematical Optimization</strong>.
+      <strong>quantum chemistry</strong>, <strong>quantum computing algorithms</strong>, and
+      <strong>mathematical optimization</strong>.
       My work focuses on the geometric and topological structures underlying symmetry-breaking transitions
       in molecular systems and nonlinear optimization landscapes — areas where differential geometry,
       Lie group theory, and electronic structure theory converge.
@@ -642,7 +657,7 @@
         A six-paper research programme (2025–2030) developing a unified geometric framework
         in which physically motivated constraints produce fibre bundle structures,
         and topological barriers govern transitions between symmetry-inequivalent states
-        in quantum chemistry, quantum computing, optimization, and machine learning.
+        in quantum chemistry, optimization, and machine learning.
       </p>
     </div>
 
@@ -758,7 +773,7 @@
            and basin traversal algorithms grounded in inverse function theory.</p>
       </div>
       <div class="research-item">
-        <h4>Ayurveda and Inflammaging</h4>
+        <h4>Ayurveda Genomics</h4>
         <p>Prakriti-based phenotypic stratification as a marker for
            inflammaging susceptibility, quantified via genomic inflammatory indices.</p>
       </div>
@@ -814,30 +829,24 @@
   <!-- Contact -->
   <section id="contact">
     <div class="section-label"><h2>Contact</h2></div>
-    <div class="contact-grid">
-      <a class="contact-card" href="mailto:baswanth.oruganti@gmail.com">
-        <div class="contact-icon">✉</div>
-        Email
+    <div class="contact-bar">
+      <a class="contact-pill" href="mailto:baswanth.oruganti@gmail.com">
+        <span class="contact-pill-icon">✉</span>baswanth.oruganti@gmail.com
       </a>
-      <a class="contact-card" href="https://orcid.org/0000-0002-4199-2750" target="_blank">
-        <div class="contact-icon">🆔</div>
-        ORCID
+      <a class="contact-pill" href="https://orcid.org/0000-0002-4199-2750" target="_blank">
+        <span class="contact-pill-icon">🆔</span>ORCID
       </a>
-      <a class="contact-card" href="https://scholar.google.com/citations?user=wsMWCEIAAAAJ" target="_blank">
-        <div class="contact-icon">◎</div>
-        Scholar
+      <a class="contact-pill" href="https://scholar.google.com/citations?user=wsMWCEIAAAAJ" target="_blank">
+        <span class="contact-pill-icon">◎</span>Google Scholar
       </a>
-      <a class="contact-card" href="https://github.com/baswanth-oruganti" target="_blank">
-        <div class="contact-icon">⌥</div>
-        GitHub
+      <a class="contact-pill" href="https://github.com/baswanth-oruganti" target="_blank">
+        <span class="contact-pill-icon">⌥</span>GitHub
       </a>
-      <a class="contact-card" href="https://linkedin.com/in/baswanth-oruganti-558a76234/" target="_blank">
-        <div class="contact-icon">in</div>
-        LinkedIn
+      <a class="contact-pill" href="https://linkedin.com/in/baswanth-oruganti-558a76234/" target="_blank">
+        <span class="contact-pill-icon">in</span>LinkedIn
       </a>
-      <a class="contact-card" href="https://twitter.com/BaswanthQuantum" target="_blank">
-        <div class="contact-icon">𝕏</div>
-        Twitter
+      <a class="contact-pill" href="https://twitter.com/BaswanthQuantum" target="_blank">
+        <span class="contact-pill-icon">𝕏</span>@BaswanthQuantum
       </a>
     </div>
   </section>
