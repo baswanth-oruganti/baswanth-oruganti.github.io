@@ -7,25 +7,30 @@
   <title>Baswanth Oruganti</title>
   <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300&display=swap" rel="stylesheet">
   <style>
-    /* ── Variables ───────────────────────────────────────────────── */
+    /* ── Variables ── extracted directly from P6V30 logo palette ─── */
     :root {
-      --navy:    #1e3a4a;
-      --navy2:   #274d61;
-      --navy3:   #2e5c73;
-      --amber:   #d4711f;
-      --amber2:  #e8893a;
-      --amber3:  #f5a85c;
-      --cream:   #fdf6ec;
-      --stone:   #e8d9c0;
-      --bg-soft: #faf3e8;
-      --text:    #1c2b35;
-      --muted:   #506070;
+      /* Logo navy-slate (the P6 lettering) */
+      --navy:    #1e2d40;
+      --navy2:   #243549;
+      --navy3:   #2a3d54;
+      /* Logo amber-orange spectrum */
+      --amber:   #e07010;
+      --amber2:  #f08020;
+      --amber3:  #f5a040;
+      --amberlt: #fac070;
+      /* Page: near-white with the faintest amber warmth */
+      --cream:   #fffcf8;
+      --stone:   #f0e8dc;
+      --pagebg:  #fefaf4;
+      /* Text */
+      --text:    #1a2535;
+      --muted:   #4e5f6e;
       --light:   #8fa0b0;
       --white:   #ffffff;
       --serif:   'DM Serif Display', Georgia, serif;
       --sans:    'DM Sans', system-ui, sans-serif;
       --radius:  6px;
-      --shadow:  0 2px 16px rgba(30,58,74,0.09);
+      --shadow:  0 2px 20px rgba(30,45,64,0.08);
     }
 
     /* ── Reset ───────────────────────────────────────────────────── */
@@ -33,21 +38,20 @@
     html { scroll-behavior: smooth; }
     body {
       font-family: var(--sans);
-      background: var(--cream);
+      background: var(--pagebg);
       color: var(--text);
       line-height: 1.7;
       font-size: 16px;
     }
 
-    /* ── Warm amber-ivory background texture ─────────────────────── */
+    /* ── Extremely subtle warm texture — barely visible ─────────── */
     body::before {
       content: '';
       position: fixed;
       inset: 0;
       background-image:
-        radial-gradient(circle at 10% 15%, rgba(212,113,31,0.07) 0%, transparent 45%),
-        radial-gradient(circle at 90% 80%, rgba(30,58,74,0.05) 0%, transparent 45%),
-        radial-gradient(circle at 55% 50%, rgba(245,168,92,0.04) 0%, transparent 60%);
+        radial-gradient(circle at 8% 12%, rgba(224,112,16,0.04) 0%, transparent 40%),
+        radial-gradient(circle at 92% 85%, rgba(30,45,64,0.03) 0%, transparent 40%);
       pointer-events: none;
       z-index: 0;
     }
@@ -57,14 +61,14 @@
       position: sticky;
       top: 0;
       z-index: 100;
-      background: rgba(30,58,74,0.97);
+      background: rgba(30,45,64,0.98);
       backdrop-filter: blur(8px);
       display: flex;
       align-items: center;
       justify-content: space-between;
       padding: 0 2.5rem;
-      height: 56px;
-      border-bottom: 1px solid rgba(245,168,92,0.15);
+      height: 54px;
+      border-bottom: 1px solid rgba(240,128,32,0.18);
     }
     .nav-brand {
       font-family: var(--serif);
@@ -91,7 +95,7 @@
 
     /* ── Hero ────────────────────────────────────────────────────── */
     .hero {
-      background: linear-gradient(135deg, var(--navy) 0%, var(--navy2) 55%, var(--navy3) 100%);
+      background: linear-gradient(135deg, var(--navy) 0%, var(--navy2) 60%, var(--navy3) 100%);
       position: relative;
       overflow: hidden;
       padding: 4.5rem 2.5rem 4rem;
@@ -248,7 +252,7 @@
       position: absolute;
       top: -30px; right: -30px;
       width: 160px; height: 160px;
-      border: 1px solid rgba(224,123,42,0.15);
+      border: 1px solid rgba(240,160,64,0.18);
       border-radius: 50%;
     }
     .programme-header h3 {
@@ -332,7 +336,69 @@
     .status-progress { background: #fff3e0; color: #e65100; }
     .status-planned { background: #f3f4f6; color: #6b7280; }
 
-    /* ── Two column layout ───────────────────────────────────────── */
+    /* ── Big logo showcase ───────────────────────────────────────── */
+    .logo-showcase {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 2.5rem 1rem 2rem;
+      margin-bottom: 1.8rem;
+      background: linear-gradient(160deg, #fffdf9 0%, #fef7ee 60%, #fdf3e4 100%);
+      border-radius: 12px;
+      border: 1px solid var(--stone);
+      position: relative;
+      overflow: hidden;
+    }
+    .logo-showcase::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(circle at 20% 50%, rgba(224,112,16,0.06) 0%, transparent 50%),
+        radial-gradient(circle at 80% 50%, rgba(30,45,64,0.04) 0%, transparent 50%);
+      pointer-events: none;
+    }
+    .logo-showcase img {
+      width: 280px;
+      height: 280px;
+      object-fit: contain;
+      border-radius: 50%;
+      border: 3px solid rgba(224,112,16,0.20);
+      box-shadow:
+        0 0 0 8px rgba(224,112,16,0.06),
+        0 12px 40px rgba(30,45,64,0.14);
+      position: relative;
+      z-index: 1;
+      transition: transform 0.4s ease, box-shadow 0.4s ease;
+    }
+    .logo-showcase img:hover {
+      transform: scale(1.03);
+      box-shadow:
+        0 0 0 12px rgba(224,112,16,0.09),
+        0 16px 50px rgba(30,45,64,0.18);
+    }
+    .logo-showcase-caption {
+      margin-top: 1.3rem;
+      text-align: center;
+      position: relative;
+      z-index: 1;
+    }
+    .logo-showcase-caption strong {
+      display: block;
+      font-family: var(--serif);
+      font-size: 1.15rem;
+      color: var(--navy);
+      font-weight: 400;
+      letter-spacing: 0.01em;
+    }
+    .logo-showcase-caption span {
+      font-size: 0.83rem;
+      color: var(--muted);
+      font-style: italic;
+    }
+
+    /* ── Programme grid ──────────────────────────────────────────── */
+    .programme-grid {
     .two-col {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -525,14 +591,14 @@
       <div class="title-line">Theoretical Chemist · Quantum Chemistry · Quantum Computing · Optimization</div>
       <h1>Dr. Baswanth Oruganti</h1>
       <p>
-        I work at the intersection of <strong style="color:rgba(255,255,255,0.85)">topology</strong>,
-        <strong style="color:rgba(255,255,255,0.85)">Lie theory</strong>, and
-        <strong style="color:rgba(255,255,255,0.85)">quantum computing</strong>,
+        I work at the intersection of <strong style="color:rgba(255,255,255,0.85)">Topology</strong>,
+        <strong style="color:rgba(255,255,255,0.85)">Lie Theory</strong>, and
+        <strong style="color:rgba(255,255,255,0.85)">Quantum Computing</strong>,
         developing geometric frameworks for understanding fundamental constraints
         in electronic structure theory and optimization algorithms.
       </p>
       <div class="hero-tagline">
-        Physical constraints are quotient maps. The coveted generator is the missing Lie algebra element.
+        Physical or Chemical Constraints as Quotient Maps. The coveted generator is the Missing Lie Algebra Element.
       </div>
       <div class="hero-links">
         <a href="https://orcid.org/0000-0002-4199-2750" target="_blank">ORCID</a>
@@ -557,8 +623,8 @@
     <div class="section-label"><h2>About</h2></div>
     <p class="about-text">
       I am a theoretical chemist with research interests spanning
-      <strong>quantum chemistry</strong>, <strong>quantum computing algorithms</strong>, and
-      <strong>mathematical optimization</strong>.
+      <strong>Quantum Chemistry</strong>, <strong>Quantum Computing Algorithms</strong>, and
+      <strong>Mathematical Optimization</strong>.
       My work focuses on the geometric and topological structures underlying symmetry-breaking transitions
       in molecular systems and nonlinear optimization landscapes — areas where differential geometry,
       Lie group theory, and electronic structure theory converge.
@@ -576,9 +642,19 @@
         A six-paper research programme (2025–2030) developing a unified geometric framework
         in which physically motivated constraints produce fibre bundle structures,
         and topological barriers govern transitions between symmetry-inequivalent states
-        in quantum chemistry, optimization, and machine learning.
+        in quantum chemistry, quantum computing, optimization, and machine learning.
       </p>
     </div>
+
+    <!-- Big logo showcase -->
+    <div class="logo-showcase">
+      <img src="p6v30.png" alt="P6V30 Research Programme Logo">
+      <div class="logo-showcase-caption">
+        <strong>P6V30 — Six Pillars of a Research Vision</strong>
+        <span>Constraint-Induced Topological Barriers · 2025–2030</span>
+      </div>
+    </div>
+
     <div class="programme-grid">
 
       <div class="paper-card">
@@ -682,7 +758,7 @@
            and basin traversal algorithms grounded in inverse function theory.</p>
       </div>
       <div class="research-item">
-        <h4>Ayurveda Genomics</h4>
+        <h4>Ayurveda and Inflammaging</h4>
         <p>Prakriti-based phenotypic stratification as a marker for
            inflammaging susceptibility, quantified via genomic inflammatory indices.</p>
       </div>
