@@ -303,21 +303,81 @@
       text-align: center; padding: 1.5rem; font-size: 0.88rem; margin-top: 4rem;
     }
     footer span { color: var(--amber3); }
+
+    /* ── Hamburger button ────────────────────────────────────────── */
+    .nav-hamburger {
+      display: none; flex-direction: column; gap: 5px;
+      cursor: pointer; padding: 4px; background: none; border: none;
+    }
+    .nav-hamburger span {
+      display: block; width: 24px; height: 2px;
+      background: rgba(255,255,255,0.80); border-radius: 2px;
+      transition: all 0.25s ease;
+    }
+    .nav-drawer {
+      display: none; position: fixed;
+      top: 54px; left: 0; right: 0;
+      background: rgba(30,45,64,0.99);
+      border-bottom: 1px solid rgba(240,128,32,0.18);
+      z-index: 99; padding: 0.8rem 1.4rem;
+      flex-direction: column;
+    }
+    .nav-drawer.open { display: flex; }
+    .nav-drawer a {
+      color: rgba(255,255,255,0.80); text-decoration: none;
+      font-size: 1rem; font-weight: 500;
+      letter-spacing: 0.04em; text-transform: uppercase;
+      padding: 0.75rem 0;
+      border-bottom: 1px solid rgba(255,255,255,0.07);
+      transition: color 0.2s;
+    }
+    .nav-drawer a:last-child { border-bottom: none; }
+    .nav-drawer a:hover { color: var(--amber3); }
+
+    /* ── Mobile ──────────────────────────────────────────────────── */
     @media (max-width: 900px) {
       nav { padding: 0 1.4rem; }
       .nav-links { display: none; }
-      .hero { padding: 3rem 1.4rem 2.5rem; }
-      .hero-inner { grid-template-columns: 1fr; gap: 1.5rem; text-align: center; }
-      .hero-logo { margin: 0 auto; }
-      .hero-tagline { text-align: left; }
-      .hero-links { justify-content: center; }
-      .page { padding: 0 1.4rem 3rem; }
-      .pillar-triptych { grid-template-columns: 1fr; }
+      .nav-hamburger { display: flex; }
+      .hero { padding: 2.5rem 1.4rem 2rem; }
+      .hero-inner { grid-template-columns: 1fr; gap: 1.2rem; text-align: center; }
+      .hero-logo { margin: 0 auto; width: 80px; height: 80px; }
+      .hero-text h1 { font-size: 2.2rem; }
+      .hero-text .title-line { font-size: 0.78rem; }
+      .hero-text p { font-size: 0.95rem; max-width: 100%; }
+      .hero-tagline { font-size: 0.82rem; text-align: left; line-height: 1.6; }
+      .hero-links { justify-content: center; gap: 0.6rem; }
+      .page { padding: 0 1.1rem 2.5rem; }
+      section { margin-top: 2.5rem; }
+      .section-label h2 { font-size: 1.3rem; }
+      .about-text { font-size: 0.95rem; }
+      .programme-header { padding: 1.4rem 1.2rem; }
+      .programme-header h3 { font-size: 1.1rem; }
+      .programme-header p { font-size: 0.88rem; }
+      .pillar-triptych { grid-template-columns: 1fr; gap: 1rem; }
       .pillar-logo-col { order: -1; }
-      .pillar-logo-col img { width: 220px; height: 220px; }
+      .pillar-logo-col img { width: 200px; height: 200px; }
+      .pillar-col.right .pillar-card { border-right: 1px solid var(--stone); border-left: 3px solid var(--stone); }
+      .pillar-col.right .pillar-card:hover { border-right-color: var(--stone); border-left-color: var(--amber); transform: translateX(2px); }
+      .pillar-title { font-size: 0.95rem; }
+      .pillar-desc  { font-size: 0.84rem; }
+      .torus-wrap video { max-height: 260px; }
+      .torus-caption { flex-direction: column; gap: 0.6rem; padding: 0.9rem 1rem; }
+      .torus-caption-text strong { font-size: 0.88rem; }
+      .torus-caption-text span   { font-size: 0.78rem; }
       .two-col { grid-template-columns: 1fr; }
+      .card { padding: 1.2rem 1.3rem; }
+      .card ul li { font-size: 0.88rem; }
       .research-list { grid-template-columns: 1fr; }
+      .research-item h4 { font-size: 0.93rem; }
+      .research-item p  { font-size: 0.85rem; }
       .contact-bar { gap: 0.5rem; }
+      .contact-pill { font-size: 0.84rem; padding: 0.42rem 0.9rem 0.42rem 0.6rem; }
+    }
+    @media (max-width: 480px) {
+      .hero-text h1 { font-size: 1.9rem; }
+      .pillar-logo-col img { width: 160px; height: 160px; }
+      .torus-wrap video { max-height: 200px; }
     }
   </style>
 </head>
@@ -333,7 +393,29 @@
     <li><a href="#publications">Publications</a></li>
     <li><a href="#contact">Contact</a></li>
   </ul>
+  <button class="nav-hamburger" id="menuBtn" aria-label="Open menu">
+    <span></span><span></span><span></span>
+  </button>
 </nav>
+
+<!-- Mobile nav drawer -->
+<div class="nav-drawer" id="navDrawer">
+  <a href="#torus"        onclick="closeMenu()">Torus</a>
+  <a href="#vision"       onclick="closeMenu()">P6V30</a>
+  <a href="#research"     onclick="closeMenu()">Research</a>
+  <a href="#experience"   onclick="closeMenu()">Experience</a>
+  <a href="#publications" onclick="closeMenu()">Publications</a>
+  <a href="#contact"      onclick="closeMenu()">Contact</a>
+</div>
+<script>
+  var btn = document.getElementById('menuBtn');
+  var drawer = document.getElementById('navDrawer');
+  function closeMenu() { drawer.classList.remove('open'); }
+  btn.addEventListener('click', function() { drawer.classList.toggle('open'); });
+  document.addEventListener('click', function(e) {
+    if (!drawer.contains(e.target) && e.target !== btn && !btn.contains(e.target)) closeMenu();
+  });
+</script>
 
 <header class="hero">
   <div class="hero-inner">
@@ -376,18 +458,25 @@
       <strong>Mathematical Optimization</strong>.
       My work focuses on the geometric and topological structures underlying symmetry-breaking transitions
       in molecular systems and nonlinear optimization landscapes — areas where Differential Geometry,
-      Lie Group Theory, and Electronic Structure Theory converge. An example of a Topological Barrier is a Clifford Torus, which forms an obstruction between Aromatic and Antiaromatic TSs under the spin-symmetry constraint</h2></div>
+      Lie Group Theory, and Electronic Structure Theory converge.An example of a Topological Barrier is a Clifford Torus shown below, which forms an obstruction between Aromatic and Antiaromatic TSs under the spin-symmetry constraint.
     </p>
   </section>
 
-  <!-- Clifford Torus Animation -->
+  <!-- Clifford Torus is an Example of a Fibre Bundle under the Hopf Fibration Map between S&sup3 and S&sup2 -->
   <section id="torus">
-    <div class="section-label"><h2>Clifford Torus is an Example of a Fibre Bundle under the Hopf Fibration Map between S&sup3 and S&sup2</h2></div>
+    <div class="section-label"><h2>Clifford Torus</h2></div>
     <div class="torus-wrap">
-      <video autoplay loop muted playsinline preload="metadata">
+      <video id="torusVideo" loop muted playsinline preload="auto"
+             style="display:block;width:100%;height:auto;max-height:520px;object-fit:cover;">
         <source src="clifford_torus_anim.mp4" type="video/mp4">
-        Your browser does not support HTML5 video.
       </video>
+      <div id="torusError" style="display:none;padding:2.5rem;text-align:center;
+           background:var(--navy);color:rgba(255,255,255,0.55);font-size:0.93rem;">
+        <div style="font-size:2rem;margin-bottom:0.6rem;">▶</div>
+        Video could not be loaded. Please ensure
+        <code style="color:var(--amber3);">clifford_torus_anim.mp4</code>
+        is in the same folder as this page.
+      </div>
       <div class="torus-caption">
         <span class="torus-caption-badge">Singular Set &Sigma;</span>
         <div class="torus-caption-text">
@@ -404,6 +493,35 @@
       </div>
     </div>
   </section>
+  <script>
+    (function() {
+      var v = document.getElementById('torusVideo');
+      var err = document.getElementById('torusError');
+      if (!v) return;
+      // Show error if video fails to load
+      v.addEventListener('error', function() {
+        v.style.display = 'none';
+        err.style.display = 'block';
+      });
+      v.addEventListener('loadedmetadata', function() {
+        // Attempt programmatic play to handle autoplay policies
+        var p = v.play();
+        if (p !== undefined) {
+          p.catch(function() {
+            // Autoplay blocked — add controls so user can start manually
+            v.setAttribute('controls', '');
+          });
+        }
+      });
+      // If src is empty or file missing, error fires; also check after short delay
+      setTimeout(function() {
+        if (v.readyState === 0 && v.networkState === 3) {
+          v.style.display = 'none';
+          err.style.display = 'block';
+        }
+      }, 3000);
+    })();
+  </script>
 
   <section id="vision">
     <div class="section-label"><h2>P6V30 Research Programme</h2></div>
