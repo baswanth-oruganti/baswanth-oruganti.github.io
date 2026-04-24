@@ -7,22 +7,17 @@
   <title>Baswanth Oruganti</title>
   <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300&display=swap" rel="stylesheet">
   <style>
-    /* ── Variables ── extracted directly from P6V30 logo palette ─── */
     :root {
-      /* Logo navy-slate (the P6 lettering) */
       --navy:    #1e2d40;
       --navy2:   #243549;
       --navy3:   #2a3d54;
-      /* Logo amber-orange spectrum */
       --amber:   #e07010;
       --amber2:  #f08020;
       --amber3:  #f5a040;
       --amberlt: #fac070;
-      /* Page: near-white with the faintest amber warmth */
       --cream:   #fffcf8;
       --stone:   #f0e8dc;
       --pagebg:  #fefaf4;
-      /* Text */
       --text:    #1a2535;
       --muted:   #4e5f6e;
       --light:   #8fa0b0;
@@ -32,8 +27,6 @@
       --radius:  6px;
       --shadow:  0 2px 20px rgba(30,45,64,0.08);
     }
-
-    /* ── Reset ───────────────────────────────────────────────────── */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
     body {
@@ -41,10 +34,8 @@
       background: var(--pagebg);
       color: var(--text);
       line-height: 1.7;
-      font-size: 16px;
+      font-size: 17px;
     }
-
-    /* ── Extremely subtle warm texture — barely visible ─────────── */
     body::before {
       content: '';
       position: fixed;
@@ -55,239 +46,128 @@
       pointer-events: none;
       z-index: 0;
     }
-
-    /* ── Nav ─────────────────────────────────────────────────────── */
     nav {
-      position: sticky;
-      top: 0;
-      z-index: 100;
+      position: sticky; top: 0; z-index: 100;
       background: rgba(30,45,64,0.98);
       backdrop-filter: blur(8px);
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 0 2.5rem;
-      height: 54px;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 3.5rem; height: 54px;
       border-bottom: 1px solid rgba(240,128,32,0.18);
     }
-    .nav-brand {
-      font-family: var(--serif);
-      color: var(--white);
-      font-size: 1.05rem;
-      letter-spacing: 0.01em;
-    }
+    .nav-brand { font-family: var(--serif); color: var(--white); font-size: 1.05rem; }
     .nav-brand span { color: var(--amber2); }
-    .nav-links {
-      display: flex;
-      gap: 2rem;
-      list-style: none;
-    }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
     .nav-links a {
-      color: rgba(255,255,255,0.70);
-      text-decoration: none;
-      font-size: 0.83rem;
-      font-weight: 500;
-      letter-spacing: 0.04em;
-      text-transform: uppercase;
-      transition: color 0.2s;
+      color: rgba(255,255,255,0.70); text-decoration: none;
+      font-size: 0.85rem; font-weight: 500; letter-spacing: 0.04em;
+      text-transform: uppercase; transition: color 0.2s;
     }
     .nav-links a:hover { color: var(--amber3); }
-
-    /* ── Hero ────────────────────────────────────────────────────── */
     .hero {
       background: linear-gradient(135deg, var(--navy) 0%, var(--navy2) 60%, var(--navy3) 100%);
-      position: relative;
-      overflow: hidden;
-      padding: 4.5rem 2.5rem 4rem;
+      position: relative; overflow: hidden; padding: 4.5rem 3.5rem 4rem;
     }
-    /* Subtle geometric lines */
     .hero::before {
-      content: '';
-      position: absolute;
-      top: -60px; right: -60px;
+      content: ''; position: absolute; top: -60px; right: -60px;
       width: 420px; height: 420px;
-      border: 1px solid rgba(224,123,42,0.12);
-      border-radius: 50%;
+      border: 1px solid rgba(224,123,42,0.12); border-radius: 50%;
     }
     .hero::after {
-      content: '';
-      position: absolute;
-      top: -20px; right: -20px;
+      content: ''; position: absolute; top: -20px; right: -20px;
       width: 300px; height: 300px;
-      border: 1px solid rgba(224,123,42,0.08);
-      border-radius: 50%;
+      border: 1px solid rgba(224,123,42,0.08); border-radius: 50%;
     }
     .hero-inner {
-      max-width: 1000px;
-      margin: 0 auto;
-      display: grid;
-      grid-template-columns: auto 1fr;
-      gap: 3rem;
-      align-items: center;
-      position: relative;
-      z-index: 1;
+      max-width: 1400px; margin: 0 auto;
+      display: grid; grid-template-columns: auto 1fr;
+      gap: 3rem; align-items: center; position: relative; z-index: 1;
     }
     .hero-logo {
-      width: 110px;
-      height: 110px;
-      border-radius: 50%;
+      width: 110px; height: 110px; border-radius: 50%;
       border: 2px solid rgba(224,123,42,0.35);
-      padding: 4px;
-      background: rgba(255,255,255,0.04);
-      object-fit: cover;
-      flex-shrink: 0;
+      padding: 4px; background: rgba(255,255,255,0.04);
+      object-fit: cover; flex-shrink: 0;
     }
     .hero-text h1 {
-      font-family: var(--serif);
-      font-size: 2.6rem;
-      color: var(--white);
-      line-height: 1.15;
-      margin-bottom: 0.4rem;
+      font-family: var(--serif); font-size: 3rem; color: var(--white);
+      line-height: 1.15; margin-bottom: 0.4rem;
     }
     .hero-text .title-line {
-      color: var(--amber3);
-      font-family: var(--sans);
-      font-size: 0.88rem;
-      font-weight: 400;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-      margin-bottom: 1rem;
+      color: var(--amber3); font-family: var(--sans); font-size: 0.92rem;
+      font-weight: 400; letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 1rem;
     }
     .hero-text p {
-      color: rgba(255,255,255,0.65);
-      font-size: 0.97rem;
-      max-width: 560px;
-      line-height: 1.75;
+      color: rgba(255,255,255,0.72); font-size: 1.05rem;
+      max-width: 640px; line-height: 1.78;
     }
     .hero-tagline {
-      margin-top: 1.6rem;
-      display: inline-block;
+      margin-top: 1.6rem; display: inline-block;
       background: rgba(224,123,42,0.15);
       border: 1px solid rgba(224,123,42,0.30);
       border-left: 3px solid var(--amber2);
-      padding: 0.6rem 1.1rem;
+      padding: 0.65rem 1.2rem;
       border-radius: 0 var(--radius) var(--radius) 0;
-      font-size: 0.88rem;
-      color: var(--amber3);
-      font-style: italic;
-      letter-spacing: 0.01em;
+      font-size: 0.93rem; color: var(--amber3);
+      font-style: italic; letter-spacing: 0.01em; line-height: 1.65;
     }
     .hero-links {
-      display: flex;
-      gap: 1rem;
-      margin-top: 1.6rem;
-      flex-wrap: wrap;
+      display: flex; gap: 1rem; margin-top: 1.6rem;
+      flex-wrap: wrap; align-items: center;
     }
     .hero-links a {
-      display: flex;
-      align-items: center;
-      gap: 0.4rem;
-      color: rgba(255,255,255,0.55);
-      text-decoration: none;
-      font-size: 0.82rem;
-      font-weight: 500;
-      letter-spacing: 0.03em;
-      transition: color 0.2s;
+      color: rgba(255,255,255,0.60); text-decoration: none;
+      font-size: 0.88rem; font-weight: 500; letter-spacing: 0.03em; transition: color 0.2s;
     }
     .hero-links a:hover { color: var(--amber3); }
     .hero-links .dot {
-      width: 3px; height: 3px;
-      background: rgba(255,255,255,0.25);
-      border-radius: 50%;
-      display: inline-block;
+      width: 3px; height: 3px; background: rgba(255,255,255,0.25);
+      border-radius: 50%; display: inline-block;
     }
-
-    /* ── Layout ──────────────────────────────────────────────────── */
     .page {
-      max-width: 1000px;
-      margin: 0 auto;
-      padding: 0 2.5rem 4rem;
-      position: relative;
-      z-index: 1;
+      max-width: 1400px; margin: 0 auto;
+      padding: 0 3.5rem 4rem; position: relative; z-index: 1;
     }
-
-    /* ── Section ─────────────────────────────────────────────────── */
-    section {
-      margin-top: 3.5rem;
-    }
-    .section-label {
-      display: flex;
-      align-items: center;
-      gap: 0.8rem;
-      margin-bottom: 1.5rem;
-    }
+    section { margin-top: 3.5rem; }
+    .section-label { display: flex; align-items: center; gap: 0.8rem; margin-bottom: 1.5rem; }
     .section-label h2 {
-      font-family: var(--serif);
-      font-size: 1.5rem;
-      color: var(--navy);
-      font-weight: 400;
+      font-family: var(--serif); font-size: 1.6rem;
+      color: var(--navy); font-weight: 400; white-space: nowrap;
     }
     .section-label::after {
-      content: '';
-      flex: 1;
-      height: 1px;
+      content: ''; flex: 1; height: 1px;
       background: linear-gradient(to right, var(--stone), transparent);
     }
-
-    /* ── About ───────────────────────────────────────────────────── */
     .about-text {
-      font-size: 0.97rem;
-      color: var(--muted);
-      max-width: 760px;
-      line-height: 1.85;
+      font-size: 1.05rem; color: var(--muted);
+      max-width: 900px; line-height: 1.85;
     }
     .about-text strong { color: var(--text); font-weight: 600; }
-
-    /* ── P6V30 Programme ─────────────────────────────────────────── */
     .programme-header {
       background: linear-gradient(135deg, var(--navy) 0%, var(--navy3) 100%);
-      border-radius: var(--radius);
-      padding: 2rem 2.2rem;
-      margin-bottom: 1.5rem;
-      position: relative;
-      overflow: hidden;
+      border-radius: var(--radius); padding: 2rem 2.4rem;
+      margin-bottom: 1.5rem; position: relative; overflow: hidden;
     }
     .programme-header::before {
-      content: '';
-      position: absolute;
-      top: -30px; right: -30px;
+      content: ''; position: absolute; top: -30px; right: -30px;
       width: 160px; height: 160px;
-      border: 1px solid rgba(240,160,64,0.18);
-      border-radius: 50%;
+      border: 1px solid rgba(240,160,64,0.18); border-radius: 50%;
     }
     .programme-header h3 {
-      font-family: var(--serif);
-      color: var(--white);
-      font-size: 1.25rem;
-      font-weight: 400;
-      margin-bottom: 0.4rem;
-      position: relative;
+      font-family: var(--serif); color: var(--white); font-size: 1.35rem;
+      font-weight: 400; margin-bottom: 0.5rem; position: relative;
     }
     .programme-header p {
-      color: rgba(255,255,255,0.55);
-      font-size: 0.87rem;
-      max-width: 600px;
-      line-height: 1.7;
-      position: relative;
+      color: rgba(255,255,255,0.65); font-size: 0.97rem;
+      max-width: 780px; line-height: 1.75; position: relative;
     }
-    /* ── Pillar triptych: [col L] | [logo] | [col R] ────────────── */
     .pillar-triptych {
-      display: grid;
-      grid-template-columns: 1fr auto 1fr;
-      gap: 1.4rem;
-      align-items: center;
-      margin-bottom: 0.5rem;
+      display: grid; grid-template-columns: 1fr auto 1fr;
+      gap: 1.6rem; align-items: center;
     }
-    .pillar-col {
-      display: flex;
-      flex-direction: column;
-      gap: 0.7rem;
-    }
+    .pillar-col { display: flex; flex-direction: column; gap: 0.8rem; }
     .pillar-card {
-      background: var(--white);
-      border: 1px solid var(--stone);
-      border-radius: var(--radius);
-      padding: 0.85rem 1rem;
+      background: var(--white); border: 1px solid var(--stone);
+      border-radius: var(--radius); padding: 1rem 1.2rem;
       transition: border-color 0.2s, background 0.2s, transform 0.2s;
     }
     .pillar-card:hover { background: #fffcf7; }
@@ -296,64 +176,22 @@
     .pillar-col.right .pillar-card { border-right: 3px solid var(--stone); }
     .pillar-col.right .pillar-card:hover { border-right-color: var(--amber); transform: translateX(2px); }
     .pillar-num {
-      font-family: var(--serif);
-      font-size: 0.7rem;
-      color: var(--amber);
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      margin-bottom: 0.18rem;
+      font-family: var(--serif); font-size: 0.78rem; color: var(--amber);
+      letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 0.2rem;
     }
-    .pillar-title {
-      font-size: 0.87rem;
-      font-weight: 600;
-      color: var(--navy);
-      line-height: 1.35;
-      margin-bottom: 0.22rem;
-    }
-    .pillar-desc {
-      font-size: 0.76rem;
-      color: var(--muted);
-      line-height: 1.55;
-    }
-    .pillar-meta {
-      margin-top: 0.4rem;
-      display: flex;
-      align-items: center;
-      gap: 0.4rem;
-      flex-wrap: wrap;
-    }
-    .pillar-year {
-      font-size: 0.7rem;
-      color: var(--light);
-      font-weight: 500;
-    }
-    .pillar-status {
-      font-size: 0.67rem;
-      padding: 0.1rem 0.42rem;
-      border-radius: 20px;
-      font-weight: 600;
-      letter-spacing: 0.02em;
-    }
+    .pillar-title { font-size: 1.0rem; font-weight: 600; color: var(--navy); line-height: 1.35; margin-bottom: 0.25rem; }
+    .pillar-desc  { font-size: 0.88rem; color: var(--muted); line-height: 1.6; }
+    .pillar-meta  { margin-top: 0.45rem; display: flex; align-items: center; gap: 0.45rem; flex-wrap: wrap; }
+    .pillar-year  { font-size: 0.78rem; color: var(--light); font-weight: 500; }
+    .pillar-status { font-size: 0.74rem; padding: 0.12rem 0.5rem; border-radius: 20px; font-weight: 600; }
     .status-review   { background: #e8f5e9; color: #2e7d32; }
     .status-progress { background: #fff3e0; color: #e65100; }
     .status-planned  { background: #f3f4f6; color: #6b7280; }
-
-    /* Centre logo */
-    .pillar-logo-col {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 0.7rem;
-    }
+    .pillar-logo-col { display: flex; flex-direction: column; align-items: center; gap: 0.8rem; }
     .pillar-logo-col img {
-      width: 320px;
-      height: 320px;
-      object-fit: contain;
-      border-radius: 50%;
+      width: 340px; height: 340px; object-fit: contain; border-radius: 50%;
       border: 3px solid rgba(224,112,16,0.22);
-      box-shadow:
-        0 0 0 10px rgba(224,112,16,0.07),
-        0 14px 44px rgba(30,45,64,0.13);
+      box-shadow: 0 0 0 10px rgba(224,112,16,0.07), 0 14px 44px rgba(30,45,64,0.13);
       transition: transform 0.4s ease, box-shadow 0.4s ease;
     }
     .pillar-logo-col img:hover {
@@ -362,199 +200,91 @@
     }
     .pillar-logo-caption { text-align: center; }
     .pillar-logo-caption strong {
-      display: block;
-      font-family: var(--serif);
-      font-size: 0.95rem;
-      color: var(--navy);
-      font-weight: 400;
+      display: block; font-family: var(--serif); font-size: 1.1rem;
+      color: var(--navy); font-weight: 400;
     }
-    .pillar-logo-caption span {
-      font-size: 0.76rem;
-      color: var(--muted);
-      font-style: italic;
-    }
-
-    /* ── Two column layout ───────────────────────────────────────── */
-    .two-col {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 2rem;
-    }
-
-    /* ── Card ────────────────────────────────────────────────────── */
+    .pillar-logo-caption span { font-size: 0.88rem; color: var(--muted); font-style: italic; }
+    .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
     .card {
-      background: var(--white);
-      border-radius: var(--radius);
-      padding: 1.4rem 1.6rem;
-      box-shadow: var(--shadow);
+      background: var(--white); border-radius: var(--radius);
+      padding: 1.5rem 1.7rem; box-shadow: var(--shadow);
       border: 1px solid rgba(0,0,0,0.04);
     }
     .card h3 {
-      font-family: var(--serif);
-      font-size: 1.0rem;
-      color: var(--navy);
-      font-weight: 400;
-      margin-bottom: 1rem;
-      padding-bottom: 0.6rem;
+      font-family: var(--serif); font-size: 1.1rem; color: var(--navy);
+      font-weight: 400; margin-bottom: 1rem; padding-bottom: 0.6rem;
       border-bottom: 1px solid var(--stone);
     }
-    .card ul {
-      list-style: none;
-      padding: 0;
-    }
+    .card ul { list-style: none; padding: 0; }
     .card ul li {
-      font-size: 0.87rem;
-      color: var(--muted);
-      padding: 0.35rem 0;
+      font-size: 0.93rem; color: var(--muted); padding: 0.38rem 0;
       border-bottom: 1px solid rgba(0,0,0,0.04);
-      display: flex;
-      align-items: baseline;
-      gap: 0.6rem;
+      display: flex; align-items: baseline; gap: 0.6rem;
     }
     .card ul li:last-child { border-bottom: none; }
-    .card ul li::before {
-      content: '—';
-      color: var(--amber);
-      font-size: 0.75rem;
-      flex-shrink: 0;
-    }
-    .card ul li strong {
-      color: var(--text);
-      font-weight: 500;
-    }
-    .card ul li span {
-      color: var(--light);
-      font-size: 0.8rem;
-    }
-
-    /* ── Research areas ──────────────────────────────────────────── */
-    .research-list {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 1rem;
-    }
+    .card ul li::before { content: '—'; color: var(--amber); font-size: 0.75rem; flex-shrink: 0; }
+    .card ul li strong { color: var(--text); font-weight: 500; }
+    .card ul li span   { color: var(--light); font-size: 0.83rem; }
+    .research-list { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; }
     .research-item {
-      background: var(--white);
-      border: 1px solid var(--stone);
-      border-radius: var(--radius);
-      padding: 1.1rem 1.3rem;
+      background: var(--white); border: 1px solid var(--stone);
+      border-radius: var(--radius); padding: 1.2rem 1.4rem;
       border-left: 3px solid var(--navy3);
       transition: border-left-color 0.2s, transform 0.2s;
     }
-    .research-item:hover {
-      border-left-color: var(--amber);
-      transform: translateX(3px);
-    }
-    .research-item h4 {
-      font-size: 0.88rem;
-      font-weight: 600;
-      color: var(--navy);
-      margin-bottom: 0.25rem;
-    }
-    .research-item p {
-      font-size: 0.8rem;
-      color: var(--muted);
-      line-height: 1.55;
-    }
-
-    /* ── Publications ────────────────────────────────────────────── */
+    .research-item:hover { border-left-color: var(--amber); transform: translateX(3px); }
+    .research-item h4 { font-size: 0.98rem; font-weight: 600; color: var(--navy); margin-bottom: 0.3rem; }
+    .research-item p  { font-size: 0.90rem; color: var(--muted); line-height: 1.6; }
     .pub-link {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      background: var(--navy);
-      color: var(--white);
-      text-decoration: none;
-      padding: 0.65rem 1.3rem;
-      border-radius: var(--radius);
-      font-size: 0.85rem;
-      font-weight: 500;
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      background: var(--navy); color: var(--white); text-decoration: none;
+      padding: 0.7rem 1.4rem; border-radius: var(--radius);
+      font-size: 0.92rem; font-weight: 500;
       transition: background 0.2s, transform 0.15s;
     }
     .pub-link:hover { background: var(--navy3); transform: translateY(-1px); }
     .pub-link svg { opacity: 0.7; }
-
-    /* ── Contact bar ─────────────────────────────────────────────── */
-    .contact-bar {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.6rem;
-      align-items: center;
-    }
+    .contact-bar { display: flex; flex-wrap: wrap; gap: 0.7rem; align-items: center; }
     .contact-pill {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.45rem;
-      background: var(--white);
-      border: 1px solid var(--stone);
-      border-radius: 30px;
-      padding: 0.45rem 1.1rem 0.45rem 0.7rem;
-      text-decoration: none;
-      color: var(--muted);
-      font-size: 0.84rem;
-      font-weight: 500;
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      background: var(--white); border: 1px solid var(--stone);
+      border-radius: 30px; padding: 0.5rem 1.2rem 0.5rem 0.75rem;
+      text-decoration: none; color: var(--muted);
+      font-size: 0.92rem; font-weight: 500;
       transition: border-color 0.2s, color 0.2s, background 0.2s;
     }
-    .contact-pill:hover {
-      border-color: var(--amber);
-      color: var(--navy);
-      background: #fffaf5;
-    }
+    .contact-pill:hover { border-color: var(--amber); color: var(--navy); background: #fffaf5; }
     .contact-pill-icon {
-      width: 22px; height: 22px;
-      background: var(--stone);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 0.75rem;
-      flex-shrink: 0;
-      transition: background 0.2s;
+      width: 24px; height: 24px; background: var(--stone); border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.78rem; flex-shrink: 0; transition: background 0.2s;
     }
-    .contact-pill:hover .contact-pill-icon {
-      background: rgba(224,112,16,0.12);
-    }
-
-    /* ── Footer ──────────────────────────────────────────────────── */
+    .contact-pill:hover .contact-pill-icon { background: rgba(224,112,16,0.12); }
     footer {
-      background: var(--navy);
-      color: rgba(255,255,255,0.4);
-      text-align: center;
-      padding: 1.5rem;
-      font-size: 0.8rem;
-      margin-top: 4rem;
+      background: var(--navy); color: rgba(255,255,255,0.4);
+      text-align: center; padding: 1.5rem; font-size: 0.88rem; margin-top: 4rem;
     }
     footer span { color: var(--amber3); }
-
-    /* ── Divider ─────────────────────────────────────────────────── */
-    .divider {
-      height: 1px;
-      background: linear-gradient(to right, transparent, var(--stone), transparent);
-      margin: 0.5rem 0 0;
-    }
-
-    /* ── Responsive ──────────────────────────────────────────────── */
-    @media (max-width: 768px) {
-      nav { padding: 0 1.2rem; }
+    @media (max-width: 900px) {
+      nav { padding: 0 1.4rem; }
       .nav-links { display: none; }
+      .hero { padding: 3rem 1.4rem 2.5rem; }
       .hero-inner { grid-template-columns: 1fr; gap: 1.5rem; text-align: center; }
       .hero-logo { margin: 0 auto; }
       .hero-tagline { text-align: left; }
       .hero-links { justify-content: center; }
-      .page { padding: 0 1.2rem 3rem; }
-      .programme-grid { grid-template-columns: 1fr; }
+      .page { padding: 0 1.4rem 3rem; }
+      .pillar-triptych { grid-template-columns: 1fr; }
+      .pillar-logo-col { order: -1; }
+      .pillar-logo-col img { width: 220px; height: 220px; }
       .two-col { grid-template-columns: 1fr; }
       .research-list { grid-template-columns: 1fr; }
-      .pillar-triptych { grid-template-columns: 1fr; }
-      .pillar-logo-col img { width: 240px; height: 240px; }
-      .logo-showcase img { width: 260px; height: 260px; }
       .contact-bar { gap: 0.5rem; }
     }
   </style>
 </head>
 <body>
 
-<!-- ── Navigation ──────────────────────────────────────────────── -->
 <nav>
   <span class="nav-brand">B. <span>Oruganti</span></span>
   <ul class="nav-links">
@@ -566,7 +296,6 @@
   </ul>
 </nav>
 
-<!-- ── Hero ────────────────────────────────────────────────────── -->
 <header class="hero">
   <div class="hero-inner">
     <img class="hero-logo" src="p6v30.png" alt="P6V30 Logo">
@@ -574,14 +303,14 @@
       <div class="title-line">Quantum Chemistry · Topological Barriers · Quantum Computing · Optimization</div>
       <h1>Dr. Baswanth Oruganti</h1>
       <p>
-        I work at the intersection of <strong style="color:rgba(255,255,255,0.85)">Topology</strong>,
-        <strong style="color:rgba(255,255,255,0.85)">Lie Theory</strong>, and
-        <strong style="color:rgba(255,255,255,0.85)">Quantum Computing</strong>,
+        I work at the intersection of <strong style="color:rgba(255,255,255,0.88)">Topology</strong>,
+        <strong style="color:rgba(255,255,255,0.88)">Lie Theory</strong>, and
+        <strong style="color:rgba(255,255,255,0.88)">Quantum Computing</strong>,
         developing geometric frameworks for understanding fundamental constraints
         in electronic structure theory and optimization algorithms.
       </p>
       <div class="hero-tagline">
-        Physical or Chemical Constraints Act as Quotient Maps Restricting Accessible Lie Algebras and Creating Topological Barriers. Finding The Coveted Generator To Acheive Path Connectedness is the Goal of the P6V30 Program.
+        Physical or Chemical Constraints Act as Quotient Maps Restricting Accessible Lie Algebras and Creating Topological Barriers. Finding The Coveted Generator To Achieve Path Connectedness is the Goal of the P6V30 Program.
       </div>
       <div class="hero-links">
         <a href="https://orcid.org/0000-0002-4199-2750" target="_blank">ORCID</a>
@@ -598,10 +327,8 @@
   </div>
 </header>
 
-<!-- ── Main ────────────────────────────────────────────────────── -->
 <main class="page">
 
-  <!-- About -->
   <section id="about">
     <div class="section-label"><h2>About</h2></div>
     <p class="about-text">
@@ -609,12 +336,11 @@
       <strong>Quantum Chemistry</strong>, <strong>Quantum Computing Algorithms</strong>, and
       <strong>Mathematical Optimization</strong>.
       My work focuses on the geometric and topological structures underlying symmetry-breaking transitions
-      in molecular systems and nonlinear optimization landscapes — areas where differential geometry,
-      Lie group theory, and electronic structure theory converge.
+      in molecular systems and nonlinear optimization landscapes — areas where Differential Geometry,
+      Lie Group Theory, and Electronic Structure Theory converge.
     </p>
   </section>
 
-  <!-- P6V30 Vision -->
   <section id="vision">
     <div class="section-label"><h2>P6V30 Research Programme</h2></div>
     <div class="programme-header">
@@ -627,12 +353,9 @@
       </p>
     </div>
 
-    <!-- Triptych: pillars 1-3 | logo | pillars 4-6 -->
     <div class="pillar-triptych">
 
-      <!-- Left column: Pillars 1-3 -->
       <div class="pillar-col left">
-
         <div class="pillar-card">
           <div class="pillar-num">Pillar 1</div>
           <div class="pillar-title">UEIT-TOPCT</div>
@@ -642,7 +365,6 @@
             <span class="pillar-status status-review">In Review</span>
           </div>
         </div>
-
         <div class="pillar-card">
           <div class="pillar-num">Pillar 2</div>
           <div class="pillar-title">UPGCC</div>
@@ -652,7 +374,6 @@
             <span class="pillar-status status-progress">In Progress</span>
           </div>
         </div>
-
         <div class="pillar-card">
           <div class="pillar-num">Pillar 3</div>
           <div class="pillar-title">DLTR</div>
@@ -662,10 +383,8 @@
             <span class="pillar-status status-progress">Theory Complete</span>
           </div>
         </div>
-
       </div>
 
-      <!-- Centre: logo -->
       <div class="pillar-logo-col">
         <img src="p6v30.png" alt="P6V30 Research Programme Logo">
         <div class="pillar-logo-caption">
@@ -674,9 +393,7 @@
         </div>
       </div>
 
-      <!-- Right column: Pillars 4-6 -->
       <div class="pillar-col right">
-
         <div class="pillar-card">
           <div class="pillar-num">Pillar 4</div>
           <div class="pillar-title">DLTR-Transit</div>
@@ -686,7 +403,6 @@
             <span class="pillar-status status-planned">Planned</span>
           </div>
         </div>
-
         <div class="pillar-card">
           <div class="pillar-num">Pillar 5</div>
           <div class="pillar-title">CIFB-TB I</div>
@@ -696,7 +412,6 @@
             <span class="pillar-status status-planned">Planned</span>
           </div>
         </div>
-
         <div class="pillar-card">
           <div class="pillar-num">Pillar 6</div>
           <div class="pillar-title">CIFB-TB II</div>
@@ -706,19 +421,17 @@
             <span class="pillar-status status-planned">Planned</span>
           </div>
         </div>
-
       </div>
 
     </div>
   </section>
 
-  <!-- Research Areas -->
   <section id="research">
     <div class="section-label"><h2>Research Areas</h2></div>
     <div class="research-list">
       <div class="research-item">
         <h4>Topological Methods in Quantum Chemistry</h4>
-        <p>Symmetry-induced Topological Barriers, Lie Algebra Frameworks,
+        <p>Symmetry-Induced Topological Barriers, Lie Algebra Frameworks,
            and Symmetry-Breaking Transitions in Molecular Electronic Structure.</p>
       </div>
       <div class="research-item">
@@ -738,27 +451,24 @@
       </div>
     </div>
     <p style="margin-top:1rem;">
-      <a href="questionnaire.html" style="color:var(--amber);font-size:0.87rem;font-weight:500;text-decoration:none;">
+      <a href="questionnaire.html" style="color:var(--amber);font-size:0.92rem;font-weight:500;text-decoration:none;">
         → Take the Ayurvedic Prakruti Questionnaire
       </a>
     </p>
   </section>
 
-  <!-- Experience & Education -->
   <section id="experience">
     <div class="section-label"><h2>Experience &amp; Education</h2></div>
     <div class="two-col">
-
       <div class="card">
         <h3>Academic Positions</h3>
         <ul>
-          <li><strong>Associate Professor</strong> — Chanakya University <span>2024–2025<span></li>
+          <li><strong>Associate Professor</strong> — Chanakya University <span>2024–2025</span></li>
           <li><strong>Assistant Professor</strong> — SRM University-AP <span>2022–2024</span></li>
           <li><strong>Assistant Professor</strong> — GITAM University <span>2017–2019</span></li>
           <li><strong>Scientist C</strong> — ISRO Satellite Centre <span>2011–2012</span></li>
         </ul>
       </div>
-
       <div class="card">
         <h3>Education</h3>
         <ul>
@@ -769,14 +479,12 @@
           <li><strong>BSc</strong> — Acharya Nagarjuna University <span>2004–2007</span></li>
         </ul>
       </div>
-
     </div>
   </section>
 
-  <!-- Publications -->
   <section id="publications">
     <div class="section-label"><h2>Publications</h2></div>
-    <p style="color:var(--muted);font-size:0.9rem;margin-bottom:1rem;">
+    <p style="color:var(--muted);font-size:0.97rem;margin-bottom:1rem;">
       Full publication list and citation metrics available on Google Scholar.
     </p>
     <a class="pub-link" href="https://scholar.google.com/citations?user=wsMWCEIAAAAJ" target="_blank">
@@ -785,7 +493,6 @@
     </a>
   </section>
 
-  <!-- Contact -->
   <section id="contact">
     <div class="section-label"><h2>Contact</h2></div>
     <div class="contact-bar">
@@ -812,7 +519,6 @@
 
 </main>
 
-<!-- ── Footer ──────────────────────────────────────────────────── -->
 <footer>
   <p>© 2025 <span>Dr. Baswanth Oruganti</span> · All rights reserved.</p>
 </footer>
