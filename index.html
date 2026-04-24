@@ -270,142 +270,108 @@
       line-height: 1.7;
       position: relative;
     }
-    .programme-grid {
+    /* ── Pillar triptych: [col L] | [logo] | [col R] ────────────── */
+    .pillar-triptych {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 1px;
-      background: var(--stone);
-      border-radius: var(--radius);
-      overflow: hidden;
-      border: 1px solid var(--stone);
+      grid-template-columns: 1fr auto 1fr;
+      gap: 1.4rem;
+      align-items: center;
+      margin-bottom: 0.5rem;
     }
-    .paper-card {
+    .pillar-col {
+      display: flex;
+      flex-direction: column;
+      gap: 0.7rem;
+    }
+    .pillar-card {
       background: var(--white);
-      padding: 1.3rem 1.4rem;
-      transition: background 0.2s;
-      position: relative;
+      border: 1px solid var(--stone);
+      border-radius: var(--radius);
+      padding: 0.85rem 1rem;
+      transition: border-color 0.2s, background 0.2s, transform 0.2s;
     }
-    .paper-card:hover { background: #fafaf7; }
-    .paper-card::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 0;
-      width: 3px;
-      height: 100%;
-      background: var(--stone);
-      transition: background 0.2s;
-    }
-    .paper-card:hover::before { background: var(--amber); }
-    .paper-num {
+    .pillar-card:hover { background: #fffcf7; }
+    .pillar-col.left  .pillar-card { border-left: 3px solid var(--stone); }
+    .pillar-col.left  .pillar-card:hover { border-left-color: var(--amber); transform: translateX(-2px); }
+    .pillar-col.right .pillar-card { border-right: 3px solid var(--stone); }
+    .pillar-col.right .pillar-card:hover { border-right-color: var(--amber); transform: translateX(2px); }
+    .pillar-num {
       font-family: var(--serif);
-      font-size: 0.75rem;
+      font-size: 0.7rem;
       color: var(--amber);
       letter-spacing: 0.08em;
       text-transform: uppercase;
-      margin-bottom: 0.3rem;
+      margin-bottom: 0.18rem;
     }
-    .paper-title {
-      font-size: 0.9rem;
+    .pillar-title {
+      font-size: 0.87rem;
       font-weight: 600;
       color: var(--navy);
-      line-height: 1.45;
-      margin-bottom: 0.35rem;
+      line-height: 1.35;
+      margin-bottom: 0.22rem;
     }
-    .paper-desc {
-      font-size: 0.8rem;
+    .pillar-desc {
+      font-size: 0.76rem;
       color: var(--muted);
-      line-height: 1.6;
+      line-height: 1.55;
     }
-    .paper-year {
-      margin-top: 0.6rem;
-      display: inline-block;
-      font-size: 0.75rem;
+    .pillar-meta {
+      margin-top: 0.4rem;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      flex-wrap: wrap;
+    }
+    .pillar-year {
+      font-size: 0.7rem;
       color: var(--light);
       font-weight: 500;
     }
-    .paper-status {
-      display: inline-block;
-      margin-left: 0.5rem;
-      font-size: 0.72rem;
-      padding: 0.15rem 0.5rem;
+    .pillar-status {
+      font-size: 0.67rem;
+      padding: 0.1rem 0.42rem;
       border-radius: 20px;
       font-weight: 600;
-      letter-spacing: 0.03em;
+      letter-spacing: 0.02em;
     }
-    .status-review { background: #e8f5e9; color: #2e7d32; }
+    .status-review   { background: #e8f5e9; color: #2e7d32; }
     .status-progress { background: #fff3e0; color: #e65100; }
-    .status-planned { background: #f3f4f6; color: #6b7280; }
+    .status-planned  { background: #f3f4f6; color: #6b7280; }
 
-    /* ── Big logo showcase ───────────────────────────────────────── */
-    .logo-showcase {
+    /* Centre logo */
+    .pillar-logo-col {
       display: flex;
       flex-direction: column;
       align-items: center;
-      padding: 2rem 1rem 1.6rem;
-      margin-bottom: 1.8rem;
-      background: linear-gradient(160deg, #fffdf9 0%, #fef7ee 60%, #fdf3e4 100%);
-      border-radius: 12px;
-      border: 1px solid var(--stone);
-      position: relative;
-      overflow: hidden;
+      gap: 0.7rem;
     }
-    .logo-showcase::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background:
-        radial-gradient(circle at 20% 50%, rgba(224,112,16,0.06) 0%, transparent 50%),
-        radial-gradient(circle at 80% 50%, rgba(30,45,64,0.04) 0%, transparent 50%);
-      pointer-events: none;
-    }
-    .logo-showcase img {
-      width: 420px;
-      height: 420px;
+    .pillar-logo-col img {
+      width: 320px;
+      height: 320px;
       object-fit: contain;
       border-radius: 50%;
       border: 3px solid rgba(224,112,16,0.22);
       box-shadow:
         0 0 0 10px rgba(224,112,16,0.07),
-        0 16px 48px rgba(30,45,64,0.13);
-      position: relative;
-      z-index: 1;
+        0 14px 44px rgba(30,45,64,0.13);
       transition: transform 0.4s ease, box-shadow 0.4s ease;
     }
-    .logo-showcase img:hover {
+    .pillar-logo-col img:hover {
       transform: scale(1.02);
-      box-shadow:
-        0 0 0 16px rgba(224,112,16,0.08),
-        0 20px 60px rgba(30,45,64,0.17);
+      box-shadow: 0 0 0 16px rgba(224,112,16,0.09), 0 18px 56px rgba(30,45,64,0.17);
     }
-    .logo-showcase-caption {
-      margin-top: 1.1rem;
-      text-align: center;
-      position: relative;
-      z-index: 1;
-    }
-    .logo-showcase-caption strong {
+    .pillar-logo-caption { text-align: center; }
+    .pillar-logo-caption strong {
       display: block;
       font-family: var(--serif);
-      font-size: 1.15rem;
+      font-size: 0.95rem;
       color: var(--navy);
       font-weight: 400;
-      letter-spacing: 0.01em;
     }
-    .logo-showcase-caption span {
-      font-size: 0.83rem;
+    .pillar-logo-caption span {
+      font-size: 0.76rem;
       color: var(--muted);
       font-style: italic;
-    }
-
-    /* ── Programme grid ──────────────────────────────────────────── */
-    .programme-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 1px;
-      background: var(--stone);
-      border-radius: var(--radius);
-      overflow: hidden;
-      border: 1px solid var(--stone);
     }
 
     /* ── Two column layout ───────────────────────────────────────── */
@@ -579,6 +545,8 @@
       .programme-grid { grid-template-columns: 1fr; }
       .two-col { grid-template-columns: 1fr; }
       .research-list { grid-template-columns: 1fr; }
+      .pillar-triptych { grid-template-columns: 1fr; }
+      .pillar-logo-col img { width: 240px; height: 240px; }
       .logo-showcase img { width: 260px; height: 260px; }
       .contact-bar { gap: 0.5rem; }
     }
@@ -661,93 +629,86 @@
       </p>
     </div>
 
-    <!-- Big logo showcase -->
-    <div class="logo-showcase">
-      <img src="p6v30.png" alt="P6V30 Research Programme Logo">
-      <div class="logo-showcase-caption">
-        <strong>P6V30 — Six Pillars of a Research Vision</strong>
-        <span>Constraint-Induced Topological Barriers · 2025–2030</span>
+    <!-- Triptych: pillars 1-3 | logo | pillars 4-6 -->
+    <div class="pillar-triptych">
+
+      <!-- Left column: Pillars 1-3 -->
+      <div class="pillar-col left">
+
+        <div class="pillar-card">
+          <div class="pillar-num">Pillar 1</div>
+          <div class="pillar-title">UEIT-TOPCT</div>
+          <div class="pillar-desc">Topological obstruction framework for symmetry-forbidden quantum transitions and its implications for Quantum Phase Estimation.</div>
+          <div class="pillar-meta">
+            <span class="pillar-year">2025–2026</span>
+            <span class="pillar-status status-review">In Review</span>
+          </div>
+        </div>
+
+        <div class="pillar-card">
+          <div class="pillar-num">Pillar 2</div>
+          <div class="pillar-title">UPGCC</div>
+          <div class="pillar-desc">Unitary Pair Geometric Coupled Cluster algorithm with SU(4) Orbital Rotations for Quantum Hardware simulation of strongly correlated systems.</div>
+          <div class="pillar-meta">
+            <span class="pillar-year">2026–2027</span>
+            <span class="pillar-status status-progress">In Progress</span>
+          </div>
+        </div>
+
+        <div class="pillar-card">
+          <div class="pillar-num">Pillar 3</div>
+          <div class="pillar-title">DLTR</div>
+          <div class="pillar-desc">Parameter-free Directional Lagrange Trust-Region Optimization Algorithm derived from the Inverse Function Theorem without heuristic controls.</div>
+          <div class="pillar-meta">
+            <span class="pillar-year">2027–2028</span>
+            <span class="pillar-status status-progress">Theory Complete</span>
+          </div>
+        </div>
+
       </div>
-    </div>
 
-    <div class="programme-grid">
-
-      <div class="paper-card">
-        <div class="paper-num">Pillar 1</div>
-        <div class="paper-title">UEIT-TOPCT</div>
-        <div class="paper-desc">
-          Topological obstruction framework for symmetry-forbidden quantum transitions
-          and its implications for quantum phase estimation.
-        </div>
-        <div>
-          <span class="paper-year">2025–2026</span>
-          <span class="paper-status status-review">In Review</span>
-        </div>
-      </div>
-
-      <div class="paper-card">
-        <div class="paper-num">Pillar 2</div>
-        <div class="paper-title">UPGCC</div>
-        <div class="paper-desc">
-          Unitary Pair Geometric Coupled Cluster algorithm with SU(4) orbital rotations
-          for quantum hardware simulation of strongly correlated systems.
-        </div>
-        <div>
-          <span class="paper-year">2026–2027</span>
-          <span class="paper-status status-progress">In Progress</span>
-        </div>
-      </div>
-
-      <div class="paper-card">
-        <div class="paper-num">Pillar 3</div>
-        <div class="paper-title">DLTR</div>
-        <div class="paper-desc">
-          Parameter-free Directional Lagrange Trust-Region optimization algorithm
-          derived from the inverse function theorem without heuristic controls.
-        </div>
-        <div>
-          <span class="paper-year">2027–2028</span>
-          <span class="paper-status status-progress">Theory Complete</span>
+      <!-- Centre: logo -->
+      <div class="pillar-logo-col">
+        <img src="p6v30.png" alt="P6V30 Research Programme Logo">
+        <div class="pillar-logo-caption">
+          <strong>P6V30</strong>
+          <span>Six Pillars · 2025–2030</span>
         </div>
       </div>
 
-      <div class="paper-card">
-        <div class="paper-num">Pillar 4</div>
-        <div class="paper-title">DLTR-Transit</div>
-        <div class="paper-desc">
-          Automated basin traversal via singular geometry: detecting and crossing
-          topological barriers in nonlinear optimization landscapes.
-        </div>
-        <div>
-          <span class="paper-year">2028</span>
-          <span class="paper-status status-planned">Planned</span>
-        </div>
-      </div>
+      <!-- Right column: Pillars 4-6 -->
+      <div class="pillar-col right">
 
-      <div class="paper-card">
-        <div class="paper-num">Pillar 5</div>
-        <div class="paper-title">CIFB-TB I</div>
-        <div class="paper-desc">
-          Constraint-Induced Fibre Bundles and Topological Barriers: unified geometric
-          framework for electronic structure theory.
+        <div class="pillar-card">
+          <div class="pillar-num">Pillar 4</div>
+          <div class="pillar-title">DLTR-Transit</div>
+          <div class="pillar-desc">Automated Basin Traversal via Singular Geometry: detecting and crossing Topological Barriers in Nonlinear Optimization landscapes.</div>
+          <div class="pillar-meta">
+            <span class="pillar-year">2028</span>
+            <span class="pillar-status status-planned">Planned</span>
+          </div>
         </div>
-        <div>
-          <span class="paper-year">2029</span>
-          <span class="paper-status status-planned">Planned</span>
-        </div>
-      </div>
 
-      <div class="paper-card">
-        <div class="paper-num">Pillar 6</div>
-        <div class="paper-title">CIFB-TB II</div>
-        <div class="paper-desc">
-          Constraint-Induced Fibre Bundles and Topological Barriers: applications
-          in mathematical optimization and machine learning.
+        <div class="pillar-card">
+          <div class="pillar-num">Pillar 5</div>
+          <div class="pillar-title">CIFB-TB I</div>
+          <div class="pillar-desc">Constraint-Induced Fibre Bundles and Topological Barriers: unified geometric framework for Electronic Structure Theory.</div>
+          <div class="pillar-meta">
+            <span class="pillar-year">2029</span>
+            <span class="pillar-status status-planned">Planned</span>
+          </div>
         </div>
-        <div>
-          <span class="paper-year">2030</span>
-          <span class="paper-status status-planned">Planned</span>
+
+        <div class="pillar-card">
+          <div class="pillar-num">Pillar 6</div>
+          <div class="pillar-title">CIFB-TB II</div>
+          <div class="pillar-desc">Constraint-Induced Fibre Bundles and Topological Barriers: applications in Mathematical Optimization and Machine Learning.</div>
+          <div class="pillar-meta">
+            <span class="pillar-year">2030</span>
+            <span class="pillar-status status-planned">Planned</span>
+          </div>
         </div>
+
       </div>
 
     </div>
@@ -759,23 +720,23 @@
     <div class="research-list">
       <div class="research-item">
         <h4>Topological Methods in Quantum Chemistry</h4>
-        <p>Symmetry-induced topological barriers, Lie algebra frameworks,
-           and symmetry-breaking transitions in molecular electronic structure.</p>
+        <p>Symmetry-induced Topological Barriers, Lie Algebra Frameworks,
+           and Symmetry-Breaking Transitions in Molecular Electronic Structure.</p>
       </div>
       <div class="research-item">
         <h4>Quantum Computing Algorithms</h4>
-        <p>Wavefunction ansatz design for NISQ hardware, quantum phase estimation,
-           and circuit-based electronic structure simulation.</p>
+        <p>Wavefunction Ansatz Design for NISQ Hardware, Quantum Phase Estimation,
+           and Circuit-Based Electronic Structure Simulation.</p>
       </div>
       <div class="research-item">
         <h4>Mathematical Optimization</h4>
-        <p>Geometry-driven trust-region methods, singular set detection,
-           and basin traversal algorithms grounded in inverse function theory.</p>
+        <p>Geometry-Driven Trust-Region Methods, Singular Set Detection,
+           and Basin Traversal Algorithms grounded in Inverse Function Theory.</p>
       </div>
       <div class="research-item">
         <h4>Ayurveda Genomics</h4>
-        <p>Prakriti-based phenotypic stratification as a marker for
-           inflammaging susceptibility, quantified via genomic inflammatory indices.</p>
+        <p>Prakriti-Based Phenotypic Stratification as a Marker for
+           Inflammaging Susceptibility, quantified via Genomic Inflammatory Indices.</p>
       </div>
     </div>
     <p style="margin-top:1rem;">
