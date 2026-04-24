@@ -209,14 +209,25 @@
 
     /* ── Clifford torus video ────────────────────────────────────── */
     .torus-wrap {
-      position: relative; border-radius: 10px; overflow: hidden;
+      position: relative;
+      border-radius: 10px;
       background: var(--navy);
       box-shadow: 0 4px 32px rgba(30,45,64,0.18);
       border: 1px solid rgba(224,112,16,0.15);
+      /* overflow:hidden + border-radius blacks out video on Android Chrome */
+      overflow: visible;
     }
     .torus-wrap video {
-      display: block; width: 100%; height: auto;
-      max-height: 520px; object-fit: cover;
+      display: block;
+      width: 100%;
+      height: auto;
+      /* object-fit:cover breaks Android Chrome video rendering */
+      object-fit: fill;
+      border-radius: 10px 10px 0 0;
+      /* Force GPU layer — fixes black frame compositing bug on Android */
+      -webkit-transform: translateZ(0);
+      transform: translateZ(0);
+      /* Remove max-height constraint that confuses Android video renderer */
     }
     .torus-caption {
       display: flex; align-items: flex-start; gap: 1rem;
@@ -361,7 +372,6 @@
       .pillar-col.right .pillar-card:hover { border-right-color: var(--stone); border-left-color: var(--amber); transform: translateX(2px); }
       .pillar-title { font-size: 0.95rem; }
       .pillar-desc  { font-size: 0.84rem; }
-      .torus-wrap video { max-height: 260px; }
       .torus-caption { flex-direction: column; gap: 0.6rem; padding: 0.9rem 1rem; }
       .torus-caption-text strong { font-size: 0.88rem; }
       .torus-caption-text span   { font-size: 0.78rem; }
@@ -377,7 +387,6 @@
     @media (max-width: 480px) {
       .hero-text h1 { font-size: 1.9rem; }
       .pillar-logo-col img { width: 160px; height: 160px; }
-      .torus-wrap video { max-height: 200px; }
     }
   </style>
 </head>
@@ -468,10 +477,7 @@
     <div class="torus-wrap">
       <video id="torusVideo" autoplay loop muted playsinline controls preload="auto"
              style="display:block;width:100%;height:auto;max-height:520px;object-fit:cover;">
-        <!-- WebM/VP9 first: best quality on Android Chrome -->
-        <source src="clifford_torus_anim.webm" type="video/webm; codecs=vp9">
-        <!-- H.264 Baseline/Main for iOS Safari and older Android -->
-        <source src="clifford_torus_anim.mp4" type="video/mp4; codecs=avc1.42E01E">
+        <source src="clifford_torus_anim.mp4" type="video/mp4">
       </video>
       <div id="torusError" style="display:none;padding:2.5rem;text-align:center;
            background:var(--navy);color:rgba(255,255,255,0.55);font-size:0.93rem;">
