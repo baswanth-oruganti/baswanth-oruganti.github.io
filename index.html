@@ -133,6 +133,8 @@
       font-family: var(--serif); font-size: 1.6rem;
       color: var(--navy); font-weight: 400; white-space: nowrap;
     }
+    /* Long headings (e.g. Clifford Torus) must wrap on mobile */
+    #torus .section-label h2 { white-space: normal; }
     .section-label::after {
       content: ''; flex: 1; height: 1px;
       background: linear-gradient(to right, var(--stone), transparent);
@@ -367,6 +369,7 @@
       .page { padding: 0 1.1rem 2.5rem; }
       section { margin-top: 2.5rem; }
       .section-label h2 { font-size: 1.3rem; }
+      #torus .section-label h2 { font-size: 1.05rem; }
       .about-text { font-size: 0.95rem; }
       .programme-header { padding: 1.4rem 1.2rem; }
       .programme-header h3 { font-size: 1.1rem; }
@@ -479,7 +482,7 @@
 
   <!-- Clifford Torus is an Example of a Fibre Bundle under the Hopf Fibration Map between S&sup3 and S&sup2 -->
   <section id="torus">
-    <div class="section-label"><h2>Clifford Torus is a Fibre Bundle under the Hopf Fibration Map between S&sup3; and S&sup2;</h2></div>
+    <div class="section-label"><h2>Clifford Torus is an Example of a Fibre Bundle under the Hopf Fibration Map between S&sup3; and S&sup2;</h2></div>
     <div class="torus-wrap">
       <video id="torusVideo" autoplay loop muted playsinline preload="auto">
         <source src="clifford_torus_anim.webm" type="video/webm">
